@@ -1,4 +1,4 @@
-# Azure DevOps (WMW-MCAPS) Development Container
+# Azure\DevOps Development Container
 
 ## What are Development Containers?
 
@@ -34,15 +34,7 @@ Development containers are a feature provided by Visual Studio Code, allowing yo
 ### Steps to Setup
 
 1. **Clone the Repository**:
-
-```sh
-git clone git@github.com:mcaps-microsoft/CSU.WMW.Infra.git
-cd CSU.WMW.Infra
-```
-
 2. **Open in VS Code**:
-   Open the repository folder in Visual Studio Code.
-
 3. **Reopen in Container**:
    - Press `F1` and select `Dev Containers: Reopen in Container`.
 
