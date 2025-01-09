@@ -1,0 +1,9 @@
+---
+
+- name: test ansible installation
+  hosts: localhost
+  connection: local
+  gather_facts: yes  # stop gathering facts for now
+  tasks:
+    - name: Print Hello MSG
+      debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
