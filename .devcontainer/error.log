@@ -1,0 +1,498 @@
+2025-01-09 19:11:50.620Z: Host information
+2025-01-09 19:11:50.620Z: ----------------
+2025-01-09 19:11:50.620Z: OS: Ubuntu 22.04.5 LTS (stable release)
+2025-01-09 19:11:50.620Z: Image details: https://github.com/github/codespaces-host-images/blob/main/README.md
+2025-01-09 19:11:50.621Z: ----------------
+
+=================================================================================
+2025-01-09 19:11:50.621Z: Configuration starting...
+2025-01-09 19:11:50.655Z: Cloning...
+
+=================================================================================
+2025-01-09 19:11:51.660Z: Creating container...
+2025-01-09 19:11:51.703Z: $ devcontainer up --id-label Type=codespaces --workspace-folder /var/lib/docker/codespacemount/workspace/lab-ansible-101 --mount type=bind,source=/.codespaces/agent/mount/cache,target=/vscode --user-data-folder /var/lib/docker/codespacemount/.persistedshare --container-data-folder .vscode-remote/data/Machine --container-system-data-folder /var/vscode-remote --log-level trace --log-format json --update-remote-user-uid-default never --mount-workspace-git-root false --omit-config-remote-env-from-metadata --skip-non-blocking-commands --skip-post-create --config "/var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer/devcontainer.json" --override-config /root/.codespaces/shared/merged_devcontainer.json --default-user-env-probe loginInteractiveShell --container-session-data-folder /workspaces/.codespaces/.persistedshare/devcontainers-cli/cache --secrets-file /root/.codespaces/shared/user-secrets-envs.json
+2025-01-09 19:11:51.893Z: @devcontainers/cli 0.68.0. Node.js v18.20.5. linux 6.5.0-1025-azure x64.
+2025-01-09 19:11:52.075Z: $ docker buildx build --load --build-arg BUILDKIT_INLINE_CACHE=1 -f /tmp/devcontainercli-root/container-features/0.68.0-1736449912071/Dockerfile-with-features -t vsc-lab-ansible-101-07d08f3ad8d2198dc250408cf590ed5ec29726aeef7e9a32f32cab7a12d5a553 --target dev_containers_target_stage --build-arg _DEV_CONTAINERS_BASE_IMAGE=dev_container_auto_added_stage_label /var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer
+2025-01-09 19:11:52.540Z: #0 building with "default" instance using docker driver
+
+2025-01-09 19:11:52.540Z: #1 [internal] load .dockerignore
+2025-01-09 19:11:52.541Z: #1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile-with-features
+#2 transferring dockerfile: 3.23kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for mcr.microsoft.com/devcontainers/base:bullseye
+2025-01-09 19:11:52.543Z: #3 DONE 0.0s
+2025-01-09 19:11:52.543Z: 
+#4 [internal] load build context
+#4 transferring context: 16.68kB done
+#4 DONE 0.0s
+
+#5 [dev_container_auto_added_stage_label 1/8] FROM mcr.microsoft.com/devcontainers/base:bullseye
+#5 DONE 0.1s
+2025-01-09 19:11:52.693Z: 
+#6 [dev_container_auto_added_stage_label 2/8] COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
+2025-01-09 19:11:52.724Z: #6 DONE 0.2s2025-01-09 19:11:52.724Z: 
+2025-01-09 19:11:52.874Z: 
+#7 [dev_container_auto_added_stage_label 3/8] RUN apt-get update && export DEBIAN_FRONTEND=noninteractive     && /bin/bash /tmp/library-scripts/common-debian.sh "********" "vscode" "1000" "1000" "false" "********" "********"
+2025-01-09 19:11:54.548Z: #7 1.824 Get:1 http://deb.debian.org/debian bullseye InRelease [116 kB]
+2025-01-09 19:11:54.725Z: #7 1.842 Get:2 http://deb.debian.org/debian-security bullseye-security InRelease [27.2 kB]
+#7 1.852 Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+2025-01-09 19:11:55.077Z: #7 2.354 Get:4 http://deb.debian.org/debian bullseye/main amd64 Packages [8066 kB]
+2025-01-09 19:11:55.206Z: #7 2.483 Get:5 http://deb.debian.org/debian-security bullseye-security/main amd64 Packages [334 kB]
+2025-01-09 19:11:55.334Z: #7 2.610 Get:6 http://deb.debian.org/debian bullseye-updates/main amd64 Packages [18.8 kB]
+2025-01-09 19:11:56.080Z: #7 3.356 Fetched 8606 kB in 2s (5194 kB/s)
+#7 3.356 Reading package lists...2025-01-09 19:11:56.486Z: 
+2025-01-09 19:11:56.714Z: #7 3.807 /tmp/library-scripts/common-debian.sh: line 11: $'\r': command not found
+#7 3.808 /tmp/library-scripts/common-debian.sh: line 12: set: -
+: invalid option
+#7 3.808 set: usage: set [-abefhkmnptuvxBCHP] [-o option-name] [--] [arg ...]
+#7 3.808 /tmp/library-scripts/common-debian.sh: line 13: $'\r': command not found
+#7 3.840 /tmp/library-scripts/common-debian.sh: line 22: $'\r': command not found
+#7 3.840 /tmp/library-scripts/common-debian.sh: line 37: syntax error near unexpected token `$'do\r''
+#7 3.840 /tmp/library-scripts/common-debian.sh: line 37: `    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
+'
+2025-01-09 19:11:56.912Z: #7 ERROR: process "/bin/sh -c apt-get update && export DEBIAN_FRONTEND=noninteractive     && /bin/bash /tmp/library-scripts/common-debian.sh \"${INSTALL_ZSH}\" \"${USERNAME}\" \"${USER_UID}\" \"${USER_GID}\" \"${UPGRADE_PACKAGES}\" \"********\" \"********\"" did not complete successfully: exit code: 2
+2025-01-09 19:11:56.973Z: ------2025-01-09 19:11:56.973Z: 
+ > [dev_container_auto_added_stage_label 3/8] RUN apt-get update && export DEBIAN_FRONTEND=noninteractive     && /bin/bash /tmp/library-scripts/common-debian.sh "********" "vscode" "1000" "1000" "false" "********" "********":
+2.483 Get:5 http://deb.debian.org/debian-security bullseye-security/main amd64 Packages [334 kB]
+2.610 Get:6 http://deb.debian.org/debian bullseye-updates/main amd64 Packages [18.8 kB]2025-01-09 19:11:56.973Z: 
+2025-01-09 19:11:56.973Z: 
+2025-01-09 19:11:56.974Z: 3.807 /tmp/library-scripts/common-debian.sh: line 11: $'\r': command not found2025-01-09 19:11:56.974Z: 
+2025-01-09 19:11:56.974Z: 3.808 /tmp/library-scripts/common-debian.sh: line 12: set: -
+: invalid option2025-01-09 19:11:56.976Z: 
+2025-01-09 19:11:56.976Z: 3.808 set: usage: set [-abefhkmnptuvxBCHP] [-o option-name] [--] [arg ...]2025-01-09 19:11:56.976Z: 
+2025-01-09 19:11:56.976Z: 3.808 /tmp/library-scripts/common-debian.sh: line 13: $'\r': command not found2025-01-09 19:11:56.976Z: 
+2025-01-09 19:11:57.011Z: 3.840 /tmp/library-scripts/common-debian.sh: line 22: $'\r': command not found2025-01-09 19:11:57.011Z: 
+2025-01-09 19:11:57.011Z: 3.840 /tmp/library-scripts/common-debian.sh: line 37: syntax error near unexpected token `$'do\r''2025-01-09 19:11:57.011Z: 
+2025-01-09 19:11:57.011Z: 3.840 /tmp/library-scripts/common-debian.sh: line 37: `    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
+'2025-01-09 19:11:57.011Z: 
+------
+2025-01-09 19:11:57.011Z: Dockerfile-with-features:162025-01-09 19:11:57.012Z: 
+2025-01-09 19:11:57.012Z: --------------------2025-01-09 19:11:57.012Z: 
+2025-01-09 19:11:57.012Z:   15 |     COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
+
+  16 | >>> RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+
+  17 | >>>     && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "********" "********" 
+
+  18 |     
+
+--------------------
+ERROR: failed to solve: process "/bin/sh -c apt-get update && export DEBIAN_FRONTEND=noninteractive     && /bin/bash /tmp/library-scripts/common-debian.sh \"${INSTALL_ZSH}\" \"${USERNAME}\" \"${USER_UID}\" \"${USER_GID}\" \"${UPGRADE_PACKAGES}\" \"********\" \"********\"" did not complete successfully: exit code: 2
+2025-01-09 19:11:57.012Z: Stop: Run: docker buildx build --load --build-arg BUILDKIT_INLINE_CACHE=1 -f /tmp/devcontainercli-root/container-features/0.68.0-1736449912071/Dockerfile-with-features -t vsc-lab-ansible-101-07d08f3ad8d2198dc250408cf590ed5ec29726aeef7e9a32f32cab7a12d5a553 --target dev_containers_target_stage --build-arg _DEV_CONTAINERS_BASE_IMAGE=dev_container_auto_added_stage_label /var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer
+2025-01-09 19:11:57.012Z: Error: Command failed: docker buildx build --load --build-arg BUILDKIT_INLINE_CACHE=1 -f /tmp/devcontainercli-root/container-features/0.68.0-1736449912071/Dockerfile-with-features -t vsc-lab-ansible-101-07d08f3ad8d2198dc250408cf590ed5ec29726aeef7e9a32f32cab7a12d5a553 --target dev_containers_target_stage --build-arg _DEV_CONTAINERS_BASE_IMAGE=dev_container_auto_added_stage_label /var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer
+2025-01-09 19:11:57.012Z: {"outcome":"error","message":"Command failed: docker buildx build --load --build-arg BUILDKIT_INLINE_CACHE=1 -f /tmp/devcontainercli-root/container-features/0.68.0-1736449912071/Dockerfile-with-features -t vsc-lab-ansible-101-07d08f3ad8d2198dc250408cf590ed5ec29726aeef7e9a32f32cab7a12d5a553 --target dev_containers_target_stage --build-arg _DEV_CONTAINERS_BASE_IMAGE=dev_container_auto_added_stage_label /var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer","description":"An error occurred building the image."}
+2025-01-09 19:11:57.012Z:     at FtA (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:466:1933)
+2025-01-09 19:11:57.012Z:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-01-09 19:11:57.012Z:     at async Pm (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:465:1896)
+2025-01-09 19:11:57.012Z:     at async NH (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:465:610)
+2025-01-09 19:11:57.012Z:     at async YtA (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:482:3771)
+2025-01-09 19:11:57.012Z:     at async eB (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:482:4886)
+2025-01-09 19:11:57.012Z:     at async prA (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:663:200)
+2025-01-09 19:11:57.012Z:     at async drA (/.codespaces/agent/bin/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:662:14706)
+2025-01-09 19:11:57.016Z: devcontainer process exited with exit code 1
+
+====================================== ERROR ====================================
+2025-01-09 19:11:57.020Z: Failed to create container.
+=================================================================================
+2025-01-09 19:11:57.021Z: Error: Command failed: docker buildx build --load --build-arg BUILDKIT_INLINE_CACHE=1 -f /tmp/devcontainercli-root/container-features/0.68.0-1736449912071/Dockerfile-with-features -t vsc-lab-ansible-101-07d08f3ad8d2198dc250408cf590ed5ec29726aeef7e9a32f32cab7a12d5a553 --target dev_containers_target_stage --build-arg _DEV_CONTAINERS_BASE_IMAGE=dev_container_auto_added_stage_label /var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer
+2025-01-09 19:11:57.026Z: Error code: 1302 (UnifiedContainersErrorFatalCreatingContainer)
+
+====================================== ERROR ====================================
+2025-01-09 19:11:57.038Z: Container creation failed.
+=================================================================================
+2025-01-09 19:11:57.057Z: 
+
+===================================== WARNING ===================================
+2025-01-09 19:11:57.060Z: Creating recovery container.
+=================================================================================
+
+=================================================================================
+2025-01-09 19:13:35.521Z: Creating container...
+2025-01-09 19:13:35.553Z: $ devcontainer up --id-label Type=codespaces --workspace-folder /var/lib/docker/codespacemount/workspace/lab-ansible-101 --mount type=bind,source=/.codespaces/agent/mount/cache,target=/vscode --user-data-folder /var/lib/docker/codespacemount/.persistedshare --container-data-folder .vscode-remote/data/Machine --container-system-data-folder /var/vscode-remote --log-level trace --log-format json --update-remote-user-uid-default never --mount-workspace-git-root false --omit-config-remote-env-from-metadata --skip-non-blocking-commands --skip-post-create --config "/var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer/devcontainer.json" --override-config /root/.codespaces/shared/merged_devcontainer.json --default-user-env-probe loginInteractiveShell --container-session-data-folder /workspaces/.codespaces/.persistedshare/devcontainers-cli/cache --secrets-file /root/.codespaces/shared/user-secrets-envs.json
+2025-01-09 19:13:35.830Z: @devcontainers/cli 0.68.0. Node.js v18.20.5. linux 6.5.0-1025-azure x64.
+2025-01-09 19:13:36.678Z: $alpine -c echo Container started
+2025-01-09 19:13:36.699Z: Unable to find image 'mcr.microsoft.com/devcontainers/base:alpine' locally
+2025-01-09 19:13:37.050Z: alpine: Pulling from devcontainers/base
+2025-01-09 19:13:37.192Z: 
+2025-01-09 19:13:37.192Z: [1A[2K
+da9db072f522: Pulling fs layer 
+[1B
+[1A[2K
+3cdff9e33f37: Pulling fs layer 
+[1B
+[1A2025-01-09 19:13:37.193Z: [2K
+87dffdaee0b6: Pulling fs layer 
+[1B
+[1A[2K
+3f72e2f1b3f3: Pulling fs layer 
+[1B
+[1A[2K
+1ac829ce5af3: Pulling fs layer 
+[1B
+[1A[2K
+2a15ab263bdf: Pulling fs layer 
+[1B
+[1A[2K
+a9bdcaa5c876: Pulling fs layer 
+[1B[4A[2K
+3f72e2f1b3f3: Waiting 
+[4B[3A[2K
+1ac829ce5af3: Waiting 
+[3B[2A[2K
+2a15ab263bdf: Waiting 
+[2B[1A[2K
+a9bdcaa5c876: Waiting 
+[1B2025-01-09 19:13:37.322Z: [6A[2K
+3cdff9e33f37: Downloading     410B/410B
+[6B[6A[2K
+3cdff9e33f37: Download complete 
+[6B[5A[2K
+87dffdaee0b6: Downloading     135B/135B
+[5B[5A[2K
+87dffdaee0b6: Verifying Checksum 
+[5B[5A[2K
+87dffdaee0b6: Download complete 
+[5B2025-01-09 19:13:37.341Z: [7A[2K2025-01-09 19:13:37.341Z: 
+da9db072f522: Downloading  48.34kB/3.624MB
+[7B2025-01-09 19:13:37.444Z: [7A[2K
+da9db072f522: Downloading  3.193MB/3.624MB
+[7B[7A[2K
+da9db072f522: Downloading  3.624MB/3.624MB
+[7B[7A[2K
+da9db072f522: Verifying Checksum 
+[7B[7A[2K
+da9db072f522: Download complete 
+[7B2025-01-09 19:13:37.461Z: [4A[2K2025-01-09 19:13:37.461Z: 
+3f72e2f1b3f3: Downloading     223B/223B
+[4B[4A[2K
+3f72e2f1b3f3: Verifying Checksum 
+[4B[4A[2K
+3f72e2f1b3f3: Download complete 
+[4B2025-01-09 19:13:37.465Z: [3A2025-01-09 19:13:37.467Z: [2K
+1ac829ce5af3: Downloading     235B/235B
+[3B[3A[2K
+1ac829ce5af3: Verifying Checksum 
+[3B[3A[2K
+1ac829ce5af3: Download complete 
+[3B[7A[2K
+da9db072f522: Extracting  65.54kB/3.624MB
+[7B2025-01-09 19:13:37.571Z: [7A[2K
+da9db072f522: Extracting  262.1kB/3.624MB
+[7B2025-01-09 19:13:37.667Z: [7A[2K2025-01-09 19:13:37.667Z: 
+da9db072f522: Extracting  2.818MB/3.624MB
+[7B2025-01-09 19:13:37.670Z: [1A[2K
+a9bdcaa5c876: Downloading  440.6kB/43.41MB
+[1B2025-01-09 19:13:37.699Z: [7A2025-01-09 19:13:37.700Z: [2K
+da9db072f522: Extracting  3.624MB/3.624MB
+[7B2025-01-09 19:13:37.704Z: [2A[2K
+2a15ab263bdf: Downloading  538.9kB/230.6MB
+[2B2025-01-09 19:13:37.775Z: [1A2025-01-09 19:13:37.779Z: [2K2025-01-09 19:13:37.779Z: 
+a9bdcaa5c876: 2025-01-09 19:13:37.779Z: Downloading  6.634MB/43.41MB
+[1B2025-01-09 19:13:37.810Z: [2A[2K2025-01-09 19:13:37.810Z: 
+2a15ab263bdf: Downloading  5.405MB/230.6MB
+[2B2025-01-09 19:13:37.878Z: [1A[2K
+a9bdcaa5c876: 2025-01-09 19:13:37.878Z: Downloading  18.14MB/43.41MB
+[1B2025-01-09 19:13:37.910Z: [2A[2K
+2a15ab263bdf: Downloading  17.83MB/230.6MB
+[2B2025-01-09 19:13:37.972Z: [7A[2K
+da9db072f522: Pull complete 
+[7B2025-01-09 19:13:37.987Z: [1A[2K
+a9bdcaa5c876: Downloading  33.62MB/43.41MB
+[1B2025-01-09 19:13:38.014Z: [2A[2K
+2a15ab263bdf: Downloading   25.4MB/230.6MB
+[2B2025-01-09 19:13:38.048Z: [6A[2K
+3cdff9e33f37: Extracting     410B/410B
+[6B2025-01-09 19:13:38.052Z: [6A[2K
+3cdff9e33f37: 2025-01-09 19:13:38.052Z: Extracting     410B/410B
+[6B2025-01-09 19:13:38.100Z: [1A[2K
+a9bdcaa5c876: Downloading  43.35MB/43.41MB
+[1B[1A[2K
+a9bdcaa5c876: Verifying Checksum 
+[1B[1A[2K
+a9bdcaa5c876: Download complete 
+[1B2025-01-09 19:13:38.114Z: [2A[2K
+2a15ab263bdf: Downloading  37.29MB/230.6MB
+[2B2025-01-09 19:13:38.222Z: [2A[2K
+2a15ab263bdf: Downloading   48.1MB/230.6MB
+[2B2025-01-09 19:13:38.329Z: [2A[2K
+2a15ab263bdf: Downloading  60.54MB/230.6MB
+[2B2025-01-09 19:13:38.416Z: [2A[2K
+2a15ab263bdf: Downloading  74.06MB/230.6MB
+[2B2025-01-09 19:13:38.516Z: [2A[2K2025-01-09 19:13:38.516Z: 
+2a15ab263bdf: Downloading  91.36MB/230.6MB
+[2B2025-01-09 19:13:38.618Z: [2A[2K
+2a15ab263bdf: 2025-01-09 19:13:38.618Z: Downloading    107MB/230.6MB
+[2B2025-01-09 19:13:38.720Z: [2A[2K2025-01-09 19:13:38.720Z: 
+2a15ab263bdf: Downloading  129.7MB/230.6MB
+[2B2025-01-09 19:13:38.822Z: [2A2025-01-09 19:13:38.823Z: [2K
+2a15ab263bdf: Downloading  150.3MB/230.6MB
+[2B2025-01-09 19:13:38.924Z: [2A2025-01-09 19:13:38.925Z: [2K
+2a15ab263bdf: Downloading  170.3MB/230.6MB
+[2B2025-01-09 19:13:39.024Z: [2A2025-01-09 19:13:39.025Z: [2K
+2a15ab263bdf: Downloading  192.5MB/230.6MB
+[2B2025-01-09 19:13:39.126Z: [2A2025-01-09 19:13:39.127Z: [2K
+2a15ab263bdf: Downloading  212.5MB/230.6MB
+[2B2025-01-09 19:13:39.237Z: [2A2025-01-09 19:13:39.237Z: [2K
+2a15ab263bdf: Downloading  228.7MB/230.6MB
+[2B2025-01-09 19:13:39.239Z: [2A2025-01-09 19:13:39.240Z: [2K
+2a15ab263bdf: Verifying Checksum 
+[2B[2A[2K
+2025-01-09 19:13:39.240Z: 2a15ab263bdf: Download complete 
+[2B2025-01-09 19:13:40.709Z: [6A2025-01-09 19:13:40.710Z: [2K
+3cdff9e33f37: Pull complete 
+[6B2025-01-09 19:13:40.719Z: [5A2025-01-09 19:13:40.719Z: [2K
+87dffdaee0b6: Extracting     135B/135B
+[5B[5A2025-01-09 19:13:40.720Z: [2K
+87dffdaee0b6: Extracting     135B/135B
+[5B2025-01-09 19:13:43.098Z: [5A[2K
+2025-01-09 19:13:43.098Z: 87dffdaee0b6: Pull complete 
+[5B2025-01-09 19:13:43.753Z: [4A2025-01-09 19:13:43.753Z: [2K
+3f72e2f1b3f3: Extracting     223B/223B
+[4B[4A[2K
+3f72e2f1b3f3: Extracting     223B/223B
+[4B2025-01-09 19:13:43.775Z: [4A[2K
+3f72e2f1b3f3: Pull complete 
+[4B2025-01-09 19:13:43.782Z: [3A2025-01-09 19:13:43.783Z: [2K
+1ac829ce5af3: Extracting     235B/235B
+[3B[3A[2K
+2025-01-09 19:13:43.783Z: 1ac829ce5af3: Extracting     235B/235B
+[3B2025-01-09 19:13:43.841Z: [3A2025-01-09 19:13:43.841Z: [2K
+1ac829ce5af3: Pull complete 
+[3B2025-01-09 19:13:44.667Z: [2A[2K
+2a15ab263bdf: Extracting  557.1kB/230.6MB
+[2B2025-01-09 19:13:44.767Z: [2A[2K
+2a15ab263bdf: Extracting  1.114MB/230.6MB
+2025-01-09 19:13:44.767Z: [2B2025-01-09 19:13:44.873Z: [2A2025-01-09 19:13:44.874Z: [2K
+2a15ab263bdf: Extracting  3.899MB/230.6MB
+[2B2025-01-09 19:13:44.989Z: [2A[2K
+2a15ab263bdf: Extracting  7.799MB/230.6MB
+[2B2025-01-09 19:13:45.100Z: [2A2025-01-09 19:13:45.100Z: [2K
+2a15ab263bdf: Extracting  11.14MB/230.6MB
+[2B2025-01-09 19:13:45.204Z: [2A2025-01-09 19:13:45.204Z: [2K
+2a15ab263bdf: Extracting  15.04MB/230.6MB
+[2B2025-01-09 19:13:45.312Z: [2A2025-01-09 19:13:45.313Z: [2K
+2a15ab263bdf: Extracting  17.27MB/230.6MB
+[2B2025-01-09 19:13:45.427Z: [2A2025-01-09 19:13:45.427Z: [2K
+2a15ab263bdf: Extracting  20.61MB/230.6MB
+[2B2025-01-09 19:13:45.567Z: [2A[2K
+2a15ab263bdf: Extracting  23.95MB/230.6MB
+[2B2025-01-09 19:13:45.748Z: [2A[2K
+2a15ab263bdf: 2025-01-09 19:13:45.748Z: Extracting  25.07MB/230.6MB
+[2B2025-01-09 19:13:45.921Z: [2A[2K
+2a15ab263bdf: Extracting  26.18MB/230.6MB
+[2B2025-01-09 19:13:46.031Z: [2A[2K2025-01-09 19:13:46.031Z: 
+2a15ab263bdf: Extracting  26.74MB/230.6MB
+[2B2025-01-09 19:13:46.198Z: [2A[2K
+2a15ab263bdf: Extracting  30.08MB/230.6MB
+[2B2025-01-09 19:13:46.316Z: [2A[2K2025-01-09 19:13:46.316Z: 
+2a15ab263bdf: Extracting   31.2MB/230.6MB
+[2B2025-01-09 19:13:46.420Z: [2A[2K2025-01-09 19:13:46.420Z: 
+2a15ab263bdf: Extracting  36.21MB/230.6MB
+[2B2025-01-09 19:13:46.536Z: [2A[2K
+2a15ab263bdf: Extracting  40.11MB/230.6MB
+[2B2025-01-09 19:13:46.654Z: [2A2025-01-09 19:13:46.654Z: [2K
+2a15ab263bdf: Extracting  42.89MB/230.6MB
+[2B2025-01-09 19:13:46.758Z: [2A2025-01-09 19:13:46.759Z: [2K
+2a15ab263bdf: Extracting  45.68MB/230.6MB
+[2B2025-01-09 19:13:46.864Z: [2A2025-01-09 19:13:46.865Z: [2K
+2a15ab263bdf: Extracting  47.35MB/230.6MB
+[2B2025-01-09 19:13:46.986Z: [2A2025-01-09 19:13:46.986Z: [2K
+2a15ab263bdf: Extracting  50.69MB/230.6MB
+[2B2025-01-09 19:13:47.106Z: [2A[2K2025-01-09 19:13:47.107Z: 
+2a15ab263bdf: Extracting  52.92MB/230.6MB
+[2B2025-01-09 19:13:47.236Z: [2A[2K
+2a15ab263bdf: Extracting  54.59MB/230.6MB
+[2B2025-01-09 19:13:47.351Z: [2A2025-01-09 19:13:47.351Z: [2K
+2a15ab263bdf: Extracting  56.82MB/230.6MB
+[2B2025-01-09 19:13:47.458Z: [2A[2K
+2025-01-09 19:13:47.458Z: 2a15ab263bdf: Extracting  58.49MB/230.6MB
+[2B2025-01-09 19:13:47.596Z: [2A[2K
+2a15ab263bdf: Extracting  60.72MB/230.6MB
+[2B2025-01-09 19:13:47.703Z: [2A2025-01-09 19:13:47.704Z: [2K
+2a15ab263bdf: Extracting  64.06MB/230.6MB
+[2B2025-01-09 19:13:47.808Z: [2A2025-01-09 19:13:47.809Z: [2K
+2a15ab263bdf: Extracting  69.07MB/230.6MB
+[2B2025-01-09 19:13:47.909Z: [2A2025-01-09 19:13:47.910Z: [2K
+2a15ab263bdf: Extracting  74.65MB/230.6MB
+[2B2025-01-09 19:13:48.021Z: [2A[2K
+2a15ab263bdf: Extracting  81.89MB/230.6MB
+[2B2025-01-09 19:13:48.122Z: [2A2025-01-09 19:13:48.122Z: [2K
+2a15ab263bdf: Extracting  88.01MB/230.6MB
+[2B2025-01-09 19:13:48.222Z: [2A[2K
+2025-01-09 19:13:48.223Z: 2a15ab263bdf: Extracting  95.81MB/230.6MB
+[2B2025-01-09 19:13:48.327Z: [2A[2K
+2a15ab263bdf: Extracting  102.5MB/230.6MB
+[2B2025-01-09 19:13:48.429Z: [2A[2K
+2025-01-09 19:13:48.430Z: 2a15ab263bdf: Extracting  111.4MB/230.6MB
+[2B2025-01-09 19:13:48.568Z: [2A[2K
+2a15ab263bdf: Extracting  114.2MB/230.6MB
+[2B2025-01-09 19:13:48.755Z: [2A[2K2025-01-09 19:13:48.755Z: 
+2a15ab263bdf: Extracting  118.7MB/230.6MB
+[2B2025-01-09 19:13:49.052Z: [2A2025-01-09 19:13:49.052Z: [2K
+2a15ab263bdf: Extracting  120.3MB/230.6MB
+[2B2025-01-09 19:13:49.210Z: [2A[2K2025-01-09 19:13:49.211Z: 
+2a15ab263bdf: Extracting  120.9MB/230.6MB
+[2B2025-01-09 19:13:49.352Z: [2A[2K
+2a15ab263bdf: 2025-01-09 19:13:49.352Z: Extracting    122MB/230.6MB
+[2B2025-01-09 19:13:49.457Z: [2A[2K2025-01-09 19:13:49.457Z: 
+2a15ab263bdf: Extracting  125.3MB/230.6MB
+[2B2025-01-09 19:13:49.574Z: [2A[2K
+2a15ab263bdf: Extracting  130.4MB/230.6MB
+[2B2025-01-09 19:13:49.679Z: [2A[2K2025-01-09 19:13:49.679Z: 
+2a15ab263bdf: Extracting  134.3MB/230.6MB
+[2B2025-01-09 19:13:49.789Z: [2A[2K
+2a15ab263bdf: 2025-01-09 19:13:49.789Z: Extracting    137MB/230.6MB
+[2B2025-01-09 19:13:49.896Z: [2A[2K
+2a15ab263bdf: Extracting    142MB/230.6MB
+2025-01-09 19:13:49.896Z: [2B2025-01-09 19:13:50.020Z: [2A[2K
+2a15ab263bdf: Extracting  145.4MB/230.6MB
+[2B2025-01-09 19:13:50.120Z: [2A2025-01-09 19:13:50.120Z: [2K2025-01-09 19:13:50.120Z: 
+2a15ab263bdf: 2025-01-09 19:13:50.120Z: Extracting  147.6MB/230.6MB
+[2B2025-01-09 19:13:50.251Z: [2A[2K2025-01-09 19:13:50.252Z: 
+2a15ab263bdf: Extracting  148.7MB/230.6MB
+[2B2025-01-09 19:13:50.380Z: [2A[2K
+2025-01-09 19:13:50.380Z: 2a15ab263bdf: Extracting    151MB/230.6MB
+[2B2025-01-09 19:13:50.483Z: [2A[2K
+2a15ab263bdf: Extracting  153.2MB/230.6MB
+[2B2025-01-09 19:13:50.589Z: [2A2025-01-09 19:13:50.589Z: [2K
+2a15ab263bdf: Extracting  157.1MB/230.6MB
+[2B2025-01-09 19:13:50.708Z: [2A[2K2025-01-09 19:13:50.708Z: 
+2a15ab263bdf: Extracting  159.3MB/230.6MB
+[2B2025-01-09 19:13:50.815Z: [2A[2K
+2a15ab263bdf: 2025-01-09 19:13:50.815Z: Extracting  162.1MB/230.6MB
+[2B2025-01-09 19:13:50.924Z: [2A[2K2025-01-09 19:13:50.924Z: 
+2a15ab263bdf: Extracting  164.9MB/230.6MB
+[2B2025-01-09 19:13:51.045Z: [2A[2K2025-01-09 19:13:51.046Z: 
+2025-01-09 19:13:51.046Z: 2a15ab263bdf: Extracting  168.2MB/230.6MB
+2025-01-09 19:13:51.046Z: [2B2025-01-09 19:13:51.155Z: [2A2025-01-09 19:13:51.155Z: [2K
+2a15ab263bdf: Extracting  172.1MB/230.6MB
+2025-01-09 19:13:51.157Z: [2B2025-01-09 19:13:51.256Z: [2A[2K2025-01-09 19:13:51.257Z: 
+2a15ab263bdf: Extracting    176MB/230.6MB
+[2B2025-01-09 19:13:51.359Z: [2A2025-01-09 19:13:51.359Z: [2K
+2a15ab263bdf: Extracting  179.4MB/230.6MB
+[2B2025-01-09 19:13:51.472Z: [2A[2K
+2a15ab263bdf: Extracting  182.2MB/230.6MB
+[2B2025-01-09 19:13:51.575Z: [2A[2K2025-01-09 19:13:51.575Z: 
+2a15ab263bdf: Extracting  184.9MB/230.6MB
+[2B2025-01-09 19:13:51.692Z: [2A[2K
+2025-01-09 19:13:51.693Z: 2a15ab263bdf: Extracting  187.7MB/230.6MB
+[2B2025-01-09 19:13:51.822Z: [2A[2K
+2a15ab263bdf: Extracting    190MB/230.6MB
+[2B2025-01-09 19:13:51.922Z: [2A2025-01-09 19:13:51.923Z: [2K
+2a15ab263bdf: Extracting  192.7MB/230.6MB
+[2B2025-01-09 19:13:52.036Z: [2A[2K2025-01-09 19:13:52.037Z: 
+2a15ab263bdf: Extracting  196.1MB/230.6MB
+[2B2025-01-09 19:13:52.155Z: [2A2025-01-09 19:13:52.159Z: [2K
+2a15ab263bdf: Extracting  199.4MB/230.6MB
+[2B2025-01-09 19:13:52.261Z: [2A[2K
+2a15ab263bdf: Extracting  202.2MB/230.6MB
+[2B2025-01-09 19:13:52.370Z: [2A[2K2025-01-09 19:13:52.371Z: 
+2a15ab263bdf: Extracting    205MB/230.6MB
+[2B2025-01-09 19:13:52.483Z: [2A2025-01-09 19:13:52.485Z: [2K
+2a15ab263bdf: Extracting  208.3MB/230.6MB
+[2B2025-01-09 19:13:52.604Z: [2A2025-01-09 19:13:52.604Z: [2K
+2a15ab263bdf: Extracting  210.6MB/230.6MB
+[2B2025-01-09 19:13:52.704Z: [2A[2K
+2a15ab263bdf: Extracting  213.9MB/230.6MB
+[2B2025-01-09 19:13:52.816Z: [2A[2K
+2a15ab263bdf: Extracting  217.3MB/230.6MB
+[2B2025-01-09 19:13:52.943Z: [2A[2K
+2a15ab263bdf: Extracting    220MB/230.6MB
+[2B2025-01-09 19:13:53.121Z: [2A[2K
+2a15ab263bdf: Extracting  221.7MB/230.6MB
+[2B2025-01-09 19:13:53.277Z: [2A[2K
+2025-01-09 19:13:53.277Z: 2a15ab263bdf: Extracting  222.3MB/230.6MB
+[2B2025-01-09 19:13:53.438Z: [2A[2K
+2a15ab263bdf: Extracting  223.4MB/230.6MB
+[2B2025-01-09 19:13:53.599Z: [2A[2K
+2025-01-09 19:13:53.599Z: 2a15ab263bdf: Extracting  224.5MB/230.6MB
+[2B2025-01-09 19:13:53.753Z: [2A2025-01-09 19:13:53.754Z: [2K
+2a15ab263bdf: Extracting  225.6MB/230.6MB
+[2B2025-01-09 19:13:54.056Z: [2A[2K
+2a15ab263bdf: Extracting  226.2MB/230.6MB
+[2B2025-01-09 19:13:54.187Z: [2A2025-01-09 19:13:54.193Z: [2K
+2a15ab263bdf: Extracting  226.7MB/230.6MB
+[2B2025-01-09 19:13:54.295Z: [2A[2K
+2a15ab263bdf: Extracting  227.3MB/230.6MB
+[2B2025-01-09 19:13:54.853Z: [2A2025-01-09 19:13:54.853Z: [2K
+2a15ab263bdf: Extracting  227.8MB/230.6MB
+[2B2025-01-09 19:13:56.571Z: [2A[2K
+2a15ab263bdf: 2025-01-09 19:13:56.571Z: Extracting  228.4MB/230.6MB
+[2B2025-01-09 19:13:56.808Z: [2A2025-01-09 19:13:56.808Z: [2K
+2a15ab263bdf: Extracting    229MB/230.6MB
+[2B2025-01-09 19:13:56.824Z: [2A[2K
+2a15ab263bdf: Extracting  230.6MB/230.6MB
+[2B2025-01-09 19:14:00.418Z: [2A2025-01-09 19:14:00.419Z: [2K
+2a15ab263bdf: Pull complete 
+[2B2025-01-09 19:14:00.447Z: [1A2025-01-09 19:14:00.448Z: [2K
+a9bdcaa5c876: Extracting  458.8kB/43.41MB
+[1B2025-01-09 19:14:00.581Z: [1A2025-01-09 19:14:00.581Z: [2K
+a9bdcaa5c876: Extracting  4.588MB/43.41MB
+[1B2025-01-09 19:14:00.707Z: [1A2025-01-09 19:14:00.708Z: [2K
+a9bdcaa5c876: Extracting  5.046MB/43.41MB
+[1B2025-01-09 19:14:00.846Z: [1A[2K
+a9bdcaa5c876: Extracting  7.799MB/43.41MB
+[1B2025-01-09 19:14:01.038Z: [1A[2K
+a9bdcaa5c876: Extracting  12.39MB/43.41MB
+[1B2025-01-09 19:14:01.165Z: [1A[2K
+a9bdcaa5c876: Extracting  12.85MB/43.41MB
+[1B2025-01-09 19:14:01.265Z: [1A[2K
+a9bdcaa5c876: 2025-01-09 19:14:01.266Z: Extracting  16.97MB/43.41MB
+[1B2025-01-09 19:14:01.369Z: [1A[2K
+2025-01-09 19:14:01.369Z: a9bdcaa5c876: Extracting  22.94MB/43.41MB
+[1B2025-01-09 19:14:01.473Z: [1A[2K
+2025-01-09 19:14:01.473Z: a9bdcaa5c876: Extracting  27.53MB/43.41MB
+[1B2025-01-09 19:14:01.581Z: [1A[2K2025-01-09 19:14:01.581Z: 
+a9bdcaa5c876: Extracting  29.36MB/43.41MB
+[1B2025-01-09 19:14:01.721Z: [1A[2K
+a9bdcaa5c876: Extracting  29.82MB/43.41MB
+[1B2025-01-09 19:14:01.863Z: [1A2025-01-09 19:14:01.863Z: [2K
+a9bdcaa5c876: Extracting  30.74MB/43.41MB
+[1B2025-01-09 19:14:01.968Z: [1A2025-01-09 19:14:01.969Z: [2K
+a9bdcaa5c876: Extracting   31.2MB/43.41MB
+[1B2025-01-09 19:14:02.083Z: [1A2025-01-09 19:14:02.083Z: [2K
+a9bdcaa5c876: Extracting  31.65MB/43.41MB
+[1B2025-01-09 19:14:02.249Z: [1A[2K2025-01-09 19:14:02.249Z: 
+a9bdcaa5c876: Extracting  33.03MB/43.41MB
+[1B2025-01-09 19:14:02.404Z: [1A2025-01-09 19:14:02.405Z: [2K
+a9bdcaa5c876: Extracting  33.95MB/43.41MB
+[1B2025-01-09 19:14:02.794Z: [1A2025-01-09 19:14:02.794Z: [2K
+a9bdcaa5c876: Extracting  35.78MB/43.41MB
+[1B2025-01-09 19:14:02.910Z: [1A[2K
+a9bdcaa5c876: Extracting  36.24MB/43.41MB
+[1B2025-01-09 19:14:03.240Z: [1A[2K2025-01-09 19:14:03.240Z: 
+a9bdcaa5c876: Extracting   36.7MB/43.41MB
+[1B2025-01-09 19:14:03.510Z: [1A[2K
+2025-01-09 19:14:03.511Z: a9bdcaa5c876: Extracting  38.99MB/43.41MB
+[1B2025-01-09 19:14:03.624Z: [1A[2K2025-01-09 19:14:03.624Z: 
+a9bdcaa5c876: Extracting  39.91MB/43.41MB
+[1B2025-01-09 19:14:03.776Z: [1A2025-01-09 19:14:03.777Z: [2K
+a9bdcaa5c876: Extracting  40.83MB/43.41MB
+[1B2025-01-09 19:14:03.894Z: [1A[2K
+a9bdcaa5c876: Extracting  41.29MB/43.41MB
+[1B2025-01-09 19:14:03.917Z: [1A2025-01-09 19:14:03.917Z: [2K
+a9bdcaa5c876: Extracting  43.41MB/43.41MB
+[1B2025-01-09 19:14:05.992Z: [1A[2K
+a9bdcaa5c876: Pull complete 
+[1B2025-01-09 19:14:06.001Z: Digest: sha256:5212d8ed44c89bfadad14a03104ef75b09c5de8642a58721c271f2e9155f5023
+2025-01-09 19:14:06.003Z: Status: Downloaded newer image for mcr.microsoft.com/devcontainers/base:alpine
+2025-01-09 19:14:06.149Z: Container started
+2025-01-09 19:14:06.377Z: Outcome: success User: vscode WorkspaceFolder: /workspaces/lab-ansible-101
+2025-01-09 19:14:06.384Z: devcontainer process exited with exit code 0
+
+=================================================================================
+2025-01-09 19:14:07.445Z: Running blocking commands...
+2025-01-09 19:14:07.479Z: $ devcontainer up --id-label Type=codespaces --workspace-folder /var/lib/docker/codespacemount/workspace/lab-ansible-101 --mount type=bind,source=/.codespaces/agent/mount/cache,target=/vscode --user-data-folder /var/lib/docker/codespacemount/.persistedshare --container-data-folder .vscode-remote/data/Machine --container-system-data-folder /var/vscode-remote --log-level trace --log-format json --update-remote-user-uid-default never --mount-workspace-git-root false --omit-config-remote-env-from-metadata --skip-non-blocking-commands --expect-existing-container --config "/var/lib/docker/codespacemount/workspace/lab-ansible-101/.devcontainer/devcontainer.json" --override-config /root/.codespaces/shared/merged_devcontainer.json --default-user-env-probe loginInteractiveShell --container-session-data-folder /workspaces/.codespaces/.persistedshare/devcontainers-cli/cache --secrets-file /root/.codespaces/shared/user-secrets-envs.json
+2025-01-09 19:14:07.684Z: @devcontainers/cli 0.68.0. Node.js v18.20.5. linux 6.5.0-1025-azure x64.
+2025-01-09 19:14:07.914Z: Outcome: success User: vscode WorkspaceFolder: /workspaces/lab-ansible-101
+2025-01-09 19:14:07.937Z: devcontainer process exited with exit code 0
+
+=================================================================================
+2025-01-09 19:14:07.966Z: Configuring codespace...
+
+=================================================================================
+2025-01-09 19:14:07.966Z: Finished configuring codespace.
