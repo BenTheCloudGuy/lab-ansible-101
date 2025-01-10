@@ -42,14 +42,14 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
 RUN apt-get install -y python3-pip
 
 # Install Dependencies
-# RUN pip3 install -y msrest \
-#    && pip3 install -y msrestazure 
+RUN pip3 install msrest \
+    && pip3 install msrestazure 
 
 # Install Ansible
-# RUN pip3 install -y ansible-core \
-#    && pip3 install -y ansible-core[azure] \
-#    && ansible-galaxy collection install azure.azcollection \
-#    && pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
+RUN pip3 install ansible-core \
+    && pip3 install ansible-core[azure] \
+    && ansible-galaxy collection install azure.azcollection --force \
+    && pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
     
 # User Scope
 USER ${USERNAME}

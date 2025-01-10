@@ -88,7 +88,7 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 
 ```bash
 # Export the variables (optional, for the current session)
-export AZURE_TENANT_ID=$(az account show --query tenantId -o tsv)
+export AZURE_TENANT=$(az account show --query tenantId -o tsv)
 export AZURE_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 
 # Define the SPN name and role
@@ -105,7 +105,7 @@ export AZURE_SECRET=$(echo $SPN_OUTPUT | jq -r '.clientSecret')
 # Display the environment variables
 echo "Environment variables set:"
 echo "AZURE_CLIENT_ID=$AZURE_CLIENT_ID"
-echo "AZURE_TENANT_ID=$AZURE_TENANT_ID"
+echo "AZURE_TENANT=$AZURE_TENANT_ID"
 echo "AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID"
 ```
 
