@@ -39,15 +39,15 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
     && packer --version
 
 # Install PIP3
-RUN apt-get install python3-pip
+RUN apt-get install -y python3-pip
 
 # Install Dependencies
-RUN pip3 install msrest \
-    && pip3 install msrestazure 
+RUN pip3 install -y msrest \
+    && pip3 install -y msrestazure 
 
 # Install Ansible
-RUN pip3 install ansible-core \
-    && pip3 install ansible-core[azure] \
+RUN pip3 install -y ansible-core \
+    && pip3 install -y ansible-core[azure] \
     && ansible-galaxy collection install azure.azcollection \
     && pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
     
