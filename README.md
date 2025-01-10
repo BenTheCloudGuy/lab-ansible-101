@@ -33,14 +33,6 @@
   - Explain how to clone repo
   - Walk through DevContainer setup
 
-## Configure Ansible for IaC ##
-
-Ansible can deploy Azure Infrastructure as well as configure those resources. https://galaxy.ansible.com/ui/repo/published/azure/azcollection/
-
-```bash
-# Install Azure.AzCollection 
-ansible-galaxy collection install azure.azcollection
-```
 
 ## Configure Bastion Tunnel ##
 
