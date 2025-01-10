@@ -1,0 +1,16 @@
+---
+- name: Create Azure Resource Group
+  hosts: localhost
+  tasks:
+    - name: Create a resource group in Azure
+      azure.azcollection.azure_rm_resourcegroup:
+        name: ansible-lab01
+        location: eastus
+        tags:
+          environment: lab
+          owner: ansible
+      register: result
+
+    - name: Show result
+      debug:
+        var: result

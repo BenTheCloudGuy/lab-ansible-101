@@ -3,7 +3,7 @@
 - Document setting up lab via devcontainer/GitHub Workspaces
   - validate ansible local working
   - login Az CLI
-- Build Deck | Ansible 101 
+- Build Deck | Ansible 101
   - Review what Ansible is and where it belongs in the DevOps workflow
   - Talk through Requirements/Best Practices
   - Talk about options/setup/install
@@ -12,10 +12,10 @@
   - Talk a bit about Ansible Tower and OpenSource Alternatives
   - Dive in to Idempotency (DEMO)
   - Github Integration
-- Infrastructure (Bicep) - Requires Contributor and User 
+- Infrastructure (Bicep) - Requires Contributor and User
   - deploy VNET | 10.0.0.0/24
     - SUBNET (BASTION) | 10.0.0.0/26
-    - SUBNET (EXTERNAL)| 10.0.0.0/27 
+    - SUBNET (EXTERNAL)| 10.0.0.0/27
     - SUBNET (INTERNAL)| 10.0.0.0/27
   - deploy NSGS
   - deploy BASTION SERVICE
@@ -29,12 +29,18 @@
     - Configure Certificate
     - Configure Bindings
     - Configure Server Hardening Rules
+- Demo
+  - Explain how to clone repo
+  - Walk through DevContainer setup
+
 
 ## Configure Bastion Tunnel ##
 
-```bash 
+```bash
+# Login via your Tenant
 az login
 
+# Configure Bastion Tunnel
 az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" --target-resource-id "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" --resource-port "3389" --port "113389"
 
 az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" --target-resource-id "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" --resource-port "3389" --port "123389"
