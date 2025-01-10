@@ -30,11 +30,22 @@
     - Configure Bindings
     - Configure Server Hardening Rules
 
+## Configure Ansible for IaC ##
+
+Ansible can deploy Azure Infrastructure as well as configure those resources. https://galaxy.ansible.com/ui/repo/published/azure/azcollection/
+
+```bash
+# Install Azure.AzCollection 
+ansible-galaxy collection install azure.azcollection
+```
+
 ## Configure Bastion Tunnel ##
 
-```bash 
+```bash
+# Login via your Tenant
 az login
 
+# Configure Bastion Tunnel
 az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" --target-resource-id "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" --resource-port "3389" --port "113389"
 
 az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" --target-resource-id "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" --resource-port "3389" --port "123389"
