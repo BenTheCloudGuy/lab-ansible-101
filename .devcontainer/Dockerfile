@@ -38,16 +38,18 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
     && terraform --version \
     && packer --version
 
+# Install PIP3
+RUN apt-get install python3-pip
+
+# Install Dependencies
+RUN pip3 install msrest \
+    && pip3 install msrestazure 
+
 # Install Ansible
-RUN apt-get install python3-pip \
-    && pip3 install msrest \
-    && pip3 install msrestazure \
-    && pip3 install ansible-core \
+RUN pip3 install ansible-core \
     && pip3 install ansible-core[azure] \
     && ansible-galaxy collection install azure.azcollection \
-    && pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt \
-    && pip3 --version \
-    && ansible --version
-
+    && pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
+    
 # User Scope
 USER ${USERNAME}
