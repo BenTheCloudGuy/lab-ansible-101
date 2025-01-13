@@ -90,6 +90,8 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 
 ## Setup SPN to be used by Ansible ##
 
+For Ansible to execute correctly you'll need to create a new SPN with sufficient permissions to perform the assigned tasks. For this Demo we want to assign it Owner to the Subscription because we are creating resources and assigning RBAC with it. 
+
 ```bash
 # Export the variables (optional, for the current session)
 export AZURE_TENANT=$(az account show --query tenantId -o tsv)
@@ -140,3 +142,8 @@ Create a new file called resourceGroup.yml and copy the following code to it.
 touch labs/lab01/resourcegroup.yml
 ansible-playbook labs/lab01/resourcegroup.yml
 ```
+
+
+## Wrap up LAB01 ##
+
+We've configured everything we need to move forward with rest of the labs. We have a Workspace with Ansible installed and configured, Permissions in Azure and ResourceGroup Created. 
