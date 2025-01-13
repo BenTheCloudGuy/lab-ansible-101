@@ -117,7 +117,7 @@ echo "AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID"
 
 ## Create Our Resource Group ##
 
-Create a new file called resourceGroup.yml and copy the following code to it.
+Create a new file called lab01.yml and copy the following code to it.
 
 ```yaml
 ---
