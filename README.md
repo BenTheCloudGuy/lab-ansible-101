@@ -6,10 +6,12 @@
 - Build Deck | Ansible 101
   - Review what Ansible is and where it belongs in the DevOps workflow
   - Talk through Requirements/Best Practices
+  - Ansible vs Ansible Core (Which to Use)
   - Talk about options/setup/install
   - Talk about Magic Variables and Gather_Facts
   - Show some examples of both IaC and ConfigMgmt
   - Talk a bit about Ansible Tower and OpenSource Alternatives
+    - Ansible UI (Free)
   - Dive in to Idempotency (DEMO)
   - Github Integration
 - Infrastructure (Bicep) - Requires Contributor and User
