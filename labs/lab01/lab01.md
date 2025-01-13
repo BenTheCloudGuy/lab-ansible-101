@@ -45,6 +45,10 @@ If you encounter any problem, please open an issue at https://aka.ms/azclibug
 
 Ansible can deploy Azure Infrastructure as well as configure those resources. https://galaxy.ansible.com/ui/repo/published/azure/azcollection/
 
+```bash
+ansible-galaxy collection install azure.azcollection --force 
+```
+
 ## Validate Ansible ##
 
 Create a new file called local-test.yml and execute. 
@@ -93,7 +97,7 @@ export AZURE_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 
 # Define the SPN name and role
 SPN_NAME="ansible-spn"
-ROLE="Contributor"
+ROLE="Owner"
 
 # Create the SPN and Set it as Contributor to the target subscription.
 SPN_OUTPUT=$(az ad sp create-for-rbac --name $SPN_NAME --role $ROLE --scopes /subscriptions/$(az account show --query id -o tsv) --query "{clientId: appId, clientSecret: password, tenantId: tenant}" -o json)
@@ -134,4 +138,5 @@ Create a new file called resourceGroup.yml and copy the following code to it.
 
 ```bash
 touch labs/lab01/resourcegroup.yml
+ansible-playbook labs/lab01/resourcegroup.yml
 ```
