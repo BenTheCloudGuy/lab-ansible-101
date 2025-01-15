@@ -94,6 +94,13 @@ az login
 
 # Set AzCLI to output to Table
 az config set core.output=table
+
+# Validate Tools
+ansible --version
+
+terraform --version
+
+az --version
 ```
 
 ## Validate Ansible ##
