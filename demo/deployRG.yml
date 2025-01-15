@@ -1,0 +1,17 @@
+---
+- name: Deploy Resource Group
+  hosts: localhost
+  gather_facts: no
+  vars:
+    AZURE_REGION: eastus2
+    RESGROUP_NAME: ansibleDemo
+    VMTags: 
+      environment: Demo
+      owner: BenTheBuilder
+  tasks:
+    - name: Create a resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ RESGROUP_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        tags: "{{ VMTags }}"
+      register: azRG

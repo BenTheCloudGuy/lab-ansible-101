@@ -90,6 +90,8 @@ Uses YAML
 
 ```zsh
 # Login to Az CLI as this auth is used by Terraform and Ansible
+# Talk about how Ansible Authenticates to Azure.. EnvVars, Credentials File, SPN, Managed Identity, or CLI. 
+# Can be defined differently per Task/Module. 
 az login 
 
 # Set AzCLI to output to Table
@@ -103,9 +105,23 @@ terraform --version
 az --version
 ```
 
+## Show Local CLI Commands ##
+
+```cli
+# -m = Module.. Ansible has many built-in modules such as ping. Validated connectivity to target host. 
+ansible localhost -m ping
+
+# List all installed modules
+ansible-doc -l
+
+# Details on Module
+ansible-doc ping
+ansible-doc azure.azcollection.azure_rm_resourcegroup
+```
+
 ## Validate Ansible ##
 
-Create a new file called local-test.yml and execute. 
+Create a new file called local-test.yml and execute.
 
 ```yaml
 ---
@@ -126,8 +142,6 @@ Create a new file called local-test.yml and execute.
 ansible-galaxy collection install azure.azcollection --force
 ```
 
-
-
 ```bash
 # Create File then open and copy the above code. 
 touch labs/lab01/local-test.yml
@@ -146,4 +160,3 @@ az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" 
 # Execute playbook via bastion over custom port. 
 ansible-playbook -i mylinuxvm -e ansible_host=127.0.0.1 -e ansible_port=10022
 ```
-
