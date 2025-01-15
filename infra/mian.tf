@@ -77,6 +77,10 @@ resource "azurerm_bastion_host" "bastion" {
     subnet_id            = azurerm_subnet.bastion_subnet.id
     public_ip_address_id = azurerm_public_ip.bastion_public_ip.id
   }
+  kerberos_enabled    = true
+  ip_connect_enabled  = true
+  tunneling_enabled   = true
+  
 }
 
 # Deploy Key Vault

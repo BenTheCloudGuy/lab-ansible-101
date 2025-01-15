@@ -1,0 +1,10 @@
+---
+- name: test ansible installation
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    TEST: "World"
+  tasks:
+    - name: Print Hello MSG
+      debug: msg='Hello {{ TEST }}'

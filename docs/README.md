@@ -125,38 +125,59 @@ Create a new file called local-test.yml and execute.
 
 ```yaml
 ---
-
 - name: test ansible installation
   hosts: localhost
   connection: local
-  gather_facts: yes  # stop gathering facts for now
+  gather_facts: yes 
   tasks:
     - name: Print Hello MSG
       debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
 ```
 
+Demonstrate passing Variables inline
+
+```yaml
+---
+- name: test ansible installation
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    TEST: WORLD
+  tasks:
+    - name: Print Hello MSG
+      debug: msg='Hello from {{ TEST }}'
+```
+
+```bash
+## Inline (or ExtraVars) has precedence over all others. 
+ansible-playbook demo/testVar.yml -e 'TEST="From Earth"'
+```
+
 ## Deploy ResourceGroup with Ansible ##
 
-```cli
+```bash
 # Add AzCollection
+# https://docs.ansible.com/ansible/latest/collections/azure/azcollection/index.html
 ansible-galaxy collection install azure.azcollection --force
+
 ```
+
+## Deploy Infrastructure ##
+
+```bash
+# Add Community Terraform Collection 
+# https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html
+ansible-galaxy collection install community.general --force
+
+# Review then trigger Playbook
+ansible-playbook demo/deploy_tf.yml
+```
+
+## Setup Bastion Tunnels for Ansible ##
 
 ```bash
 # Create File then open and copy the above code. 
 touch labs/lab01/local-test.yml
 
 ## Configure Bastion Tunnel ##
-
-```bash
-# Login via your Tenant
-az login
-
-# Configure Bastion Tunnel
-az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" --target-resource-id "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" --resource-port "3389" --port "113389"
-
-az network bastion tunnel --name "MyBastion" --resource-group "MyResourceGroup" --target-resource-id "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" --resource-port "3389" --port "123389"
-
-# Execute playbook via bastion over custom port. 
-ansible-playbook -i mylinuxvm -e ansible_host=127.0.0.1 -e ansible_port=10022
-```
