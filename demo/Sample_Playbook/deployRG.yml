@@ -1,0 +1,28 @@
+---
+- name: Deploy Azure Lab Resources
+  hosts: localhost
+  vars:
+    AZURE_REGION: eastus2
+    AZURE_TENANT: "{{ lookup('env', 'AZURE_TENANT') }}"
+    RESGROUP_NAME: ansible-lab01
+    SPN_OBJECT_ID: "4b3736d4-64a9-4fc0-963c-31b19487a037"
+    SPN_APP_ID: "{{ lookup('env', 'AZURE_CLIENT_ID') }}"
+    VMTags: 
+      environment: lab
+      owner: ansible
+  tasks:
+    
+    - name: Execute bash script to set environment variables
+      script: ./set_envvars.sh
+
+    - name: Collect Data
+      debug:
+        msg: "Subscription ID: {{ lookup('env', 'AZURE_SUBSCRIPTION_ID') }}, Client ID: {{ lookup('env', 'AZURE_CLIENT_ID') }}, Tenant: {{ lookup('env', 'AZURE_TENANT') }}, Secret: {{ lookup('env', 'AZURE_SECRET') }}"
+      when: lookup('env', 'AZURE_SUBSCRIPTION_ID') | length > 0    
+
+    - name: Create a resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ RESGROUP_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        tags: "{{ VMTags }}"
+      register: azRG
