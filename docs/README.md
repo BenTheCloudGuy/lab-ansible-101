@@ -94,11 +94,27 @@ az login
 
 # Set AzCLI to output to Table
 az config set core.output=table
-
-# 
-
-
 ```
+
+## Validate Ansible ##
+
+Create a new file called local-test.yml and execute. 
+
+```yaml
+---
+
+- name: test ansible installation
+  hosts: localhost
+  connection: local
+  gather_facts: yes  # stop gathering facts for now
+  tasks:
+    - name: Print Hello MSG
+      debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
+```
+
+```bash
+# Create File then open and copy the above code. 
+touch labs/lab01/local-test.yml
 
 ## Configure Bastion Tunnel ##
 

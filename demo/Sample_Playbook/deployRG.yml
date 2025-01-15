@@ -26,25 +26,3 @@
         location: "{{ AZURE_REGION }}"
         tags: "{{ VMTags }}"
       register: azRG
-
-    - name: Deploy Azure KeyVault 
-      azure.azcollection.azure_rm_keyvault:
-        vault_name: "ansiblelabs101kv"
-        resource_group: "{{ RESGROUP_NAME }}"
-        location: "{{ AZURE_REGION }}"
-        enabled_for_deployment: true
-        enable_rbac_authorization: true
-        vault_tenant: "{{ lookup ('env', 'AZURE_TENANT') }}"
-        sku:
-          name: standard
-          family: A
-        tags: "{{ VMTags }}"
-      register: azKV
-
-    - name: Configure SPN as Keyvault Contributor
-      azure.azcollection.azure_rm_roleassignment:
-        role_definition_id: "/subscriptions/{{ lookup('env', 'AZURE_SUBSCRIPTION_ID') }}/providers/Microsoft.Authorization/roleDefinitions/00482a5a-887f-4fb3-b363-3b7fe8e74483"
-        assignee_object_id: "{{ SPN_OBJECT_ID }}"
-        scope: "/subscriptions/{{ lookup('env', 'AZURE_SUBSCRIPTION_ID') }}/"
-        state: present
-      register: azRole
