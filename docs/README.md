@@ -119,6 +119,15 @@ Create a new file called local-test.yml and execute.
       debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
 ```
 
+## Deploy ResourceGroup with Ansible ##
+
+```cli
+# Add AzCollection
+ansible-galaxy collection install azure.azcollection --force
+```
+
+
+
 ```bash
 # Create File then open and copy the above code. 
 touch labs/lab01/local-test.yml
