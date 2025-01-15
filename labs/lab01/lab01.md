@@ -108,16 +108,21 @@ SPN_OUTPUT=$(az ad sp create-for-rbac --name $SPN_NAME --role $ROLE --scopes /su
 export AZURE_CLIENT_ID=$(echo $SPN_OUTPUT | jq -r '.clientId')
 export AZURE_SECRET=$(echo $SPN_OUTPUT | jq -r '.clientSecret')
 
-# Display the environment variables
-echo "Environment variables set:"
-echo "AZURE_CLIENT_ID=$AZURE_CLIENT_ID"
-echo "AZURE_TENANT=$AZURE_TENANT_ID"
-echo "AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID"
+
+
+# Create Azure Credentials File for Ansible Auth
+touch ~/.azure/credentials
+echo "[default]" >> ~/.azure/credentials
+echo "subscription_id=$AZURE_SUBSCRIPTION_ID" >> ~/.azure/credentials
+echo "secret=$AZURE_SECRET" >> ~/.azure/credentials
+echo "client_id=$AZURE_CLIENT_ID" >> ~/.azure/credentials
+echo "tenant=$AZURE_TENANT" >> ~/.azure/credentials
+
 ```
 
 ## Create Our Resource Group ##
 
-Create a new file called resourceGroup.yml and copy the following code to it.
+Create a new file called lab01.yml and copy the following code to it.
 
 ```yaml
 ---
@@ -144,6 +149,55 @@ ansible-playbook labs/lab01/resourcegroup.yml
 ```
 
 
+## Setup KeyVault and RBAC ## 
+
+```yaml 
+---
+- name: Deploy Azure Lab Resources
+  hosts: localhost
+  vars:
+    AZURE_REGION: eastus2
+    RESGROUP_NAME: ansible-lab01
+
+  tasks:
+    - name: Create a resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ RESGROUP_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        tags:
+          environment: lab
+          owner: ansible
+      register: azRG
+
+    - name: Deploy Azure KeyVault 
+      azure.azcollection.azure_rm_keyvault:
+        vault_name: ansiblelab01kv
+        resource_group: "{{ RESGROUP_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        enabled_for_deployment: true
+        enable_rbac_authorization: true
+        vault_tenant: "{{ lookup ('env', 'AZURE_TENANT') }}"
+        sku:
+          name: standard
+          family: A
+        tags:
+          environment: lab
+          owner: ansible
+      register: azKV
+
+    - name: Configure SPN as Keyvault Contributor
+      azure.azcollection.azure_rm_roleassignment:
+        role_definition_id:
+          "/subscriptions/{{ lookup ('env', 'AZURE_SUBSCRIPTION_ID') }}/providers/Microsoft.Authorization/roleDefinitions/f25e0fa2-a7c8-4377-a976-54943a77a395"
+        assignee_object_id: "{{ SPN_APP_ID }}"
+        scope: "/subscriptions/{{ lookup ('env', 'AZURE_SUBSCRIPTION_ID') }}/resourceGroups/{{ RESGROUP_NAME }}/providers/Microsoft.KeyVault/vaults/ansiblelab01kv"
+```
+
+## Simplify Variables Reuse ##
+
+Add Community Collection
+ansible-galaxy collection install community.general
+
 ## Wrap up LAB01 ##
 
-We've configured everything we need to move forward with rest of the labs. We have a Workspace with Ansible installed and configured, Permissions in Azure and ResourceGroup Created. 
+We've configured everything we need to move forward with rest of the labs. We have a Workspace with Ansible installed and configured, Permissions in Azure and ResourceGroup Created.
