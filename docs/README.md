@@ -121,7 +121,7 @@ ansible-doc azure.azcollection.azure_rm_resourcegroup
 
 ## Validate Ansible ##
 
-Create a new file called local-test.yml and execute.
+Create a new file called testing.yml and execute.
 
 ```yaml
 ---
@@ -134,19 +134,23 @@ Create a new file called local-test.yml and execute.
       debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
 ```
 
-Demonstrate passing Variables inline
+Demonstrate passing Variables by updateding test.yml
 
 ```yaml
+---
 ---
 - name: test ansible installation
   hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: yes
   vars:
-    TEST: WORLD
+    TEST: "World"
   tasks:
     - name: Print Hello MSG
-      debug: msg='Hello from {{ TEST }}'
+      debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
+
+    - name: Print Hello MSG
+      debug: msg='Hello {{ TEST }}'
 ```
 
 ```bash
@@ -156,12 +160,37 @@ ansible-playbook demo/testVar.yml -e 'TEST="From Earth"'
 
 ## Deploy ResourceGroup with Ansible ##
 
+Demonstrate Deploying Azure Resources with Ansible. 
+
+```yaml
+---
+- name: Deploy Resource Group
+  hosts: localhost
+  gather_facts: no
+  vars:
+    AZURE_REGION: eastus2
+    RESGROUP_NAME: ansibleDemo
+    VMTags: 
+      environment: Demo
+      owner: BenTheBuilder
+  tasks:
+    - name: Create a resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ RESGROUP_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        tags: "{{ VMTags }}"
+      register: azRG
+```
+
 ```bash
 # Add AzCollection
 # https://docs.ansible.com/ansible/latest/collections/azure/azcollection/index.html
 ansible-galaxy collection install azure.azcollection --force
 
+# Deploy ResourceGroup
+ansible-playbook demo/deployRG.yml
 ```
+
 
 ## Deploy Infrastructure ##
 
@@ -177,7 +206,14 @@ ansible-playbook demo/deploy_tf.yml
 ## Setup Bastion Tunnels for Ansible ##
 
 ```bash
-# Create File then open and copy the above code. 
-touch labs/lab01/local-test.yml
-
 ## Configure Bastion Tunnel ##
+pip install -r requirements.txt
+
+## Configure Permissions on bastion_tunnels_inventory.py
+chmod +x /workspaces/lab-ansible-101/helper_scripts/bastion_tunnels_inventory.py
+
+```
+
+## Use Ansible to configure LINUXVM as Self-Hosted Agent for Repo ##
+
+## Use GH Actions and SH-Agent for CI/CD ##

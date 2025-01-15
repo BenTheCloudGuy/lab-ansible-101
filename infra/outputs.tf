@@ -26,6 +26,10 @@ output "linuxVMName" {
   value = azurerm_linux_virtual_machine.linux_vm.name
 }
 
+output "linuxVMId" {
+  value = azurerm_linux_virtual_machine.linux_vm.id
+}
+
 output "LinuxVMAdminUsername" {
   value = azurerm_linux_virtual_machine.linux_vm.admin_username
 }

@@ -1,10 +1,11 @@
 ---
-- name: Deploy Terraform infrastructure
+- name: Deploy infrastructure
   hosts: localhost
   gather_facts: no
   vars:
     TF_DIR: "/workspaces/lab-ansible-101/infra"
-
+    RESOURCE_GROUP_NAME: "ansibleDemo"
+    
   tasks:
     - name: Ensure Terraform is installed
       ansible.builtin.command:
@@ -21,7 +22,6 @@
       check_mode: true
       register: terraform_plan
 
-
     - name: Apply Terraform configuration
       community.general.terraform:
         project_path: "{{ TF_DIR }}"
@@ -29,6 +29,6 @@
       check_mode: false
       register: terraform_apply
 
-    - name: Get Terraform Output
+    - name: Display Terraform Output
       ansible.builtin.debug:
-        msg: "{{ terraform_apply.outputs }}"  
+        msg: "{{ terraform_apply.outputs }}"
