@@ -52,9 +52,3 @@
         port: 80
         application_pool: "{{ appPoolCreate.info.name }}"
       register: webSiteConfig 
-    
-  # Install/Configure Applications
-    - name: install GoogleChrome
-      win_chocolatey:
-        name: googlechrome
-        state: present
