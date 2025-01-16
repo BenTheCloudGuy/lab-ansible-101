@@ -27,7 +27,7 @@
 
     - name: Copy App Files
       ansible.windows.win_copy:
-        src: ansible/app_code/index.html
+        src: app_code/index.html
         dest: c:\inetpub\wwwroot\v1\index.html
       register: appFileCopy
     
