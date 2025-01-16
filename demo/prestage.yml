@@ -1,0 +1,39 @@
+---
+- name: Prestage Environment
+  hosts: localhost
+  gather_facts: no
+  vars:
+    AZURE_REGION: eastus2
+    RESGROUP_NAME: ansibleDemo
+    STORAGE_ACCOUNT_NAME: "{{ RESGROUP_NAME | lower }}tfstate"
+    CONTAINER_NAME: tfstate
+    VMTags: 
+      environment: Demo
+      owner: BenTheBuilder
+  tasks:
+    - name: Create a resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ RESGROUP_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        tags: "{{ VMTags }}"
+      register: azRG
+
+    - name: Create Storage Account for Terraform Backend
+      azure.azcollection.azure_rm_storageaccount:
+        resource_group: "{{ RESGROUP_NAME }}"
+        name: "{{ STORAGE_ACCOUNT_NAME }}"
+        location: "{{ AZURE_REGION }}"
+        account_type: Standard_LRS
+        kind: StorageV2
+        tags: "{{ VMTags }}"
+      register: storage_account
+
+    - name: Create Container for StateFile
+      azure.azcollection.azure_rm_storageblob:
+        resource_group: "{{ RESGROUP_NAME }}"
+        storage_account_name: "{{ STORAGE_ACCOUNT_NAME }}"
+        container: "{{ CONTAINER_NAME }}"
+        state: present
+      register: storage_container
+
+      

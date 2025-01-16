@@ -120,7 +120,8 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         python3 \
         python3-venv \
         python3-dev \
-        init-system-helpers"
+        init-system-helpers \
+        sshpass
         
     # Install libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
