@@ -14,15 +14,12 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v1
 
-            - name: Testing $PATH Communications
+            - name: Current User
+              run: whoami
+
+            - name: Get PATH
               run: echo $PATH
-
-            - name: update $PATH
-              run: PATH=$(echo "/home/adminuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin")
-
-            - name: Validate $PATH
-              run: echo $PATH
-
+            
             - name: Test Ansible
               run: ansible --version
             
