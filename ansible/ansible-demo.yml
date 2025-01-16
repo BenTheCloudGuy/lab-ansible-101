@@ -4,7 +4,7 @@
   connection: winrm
   gather_facts: yes
   vars:
-    TEST: "World" 
+    URL: "ansibledemo.msftlabs.work"
   collections:
     - community.windows
     - ansible.windows
@@ -37,13 +37,17 @@
         state: started
       register: appPoolCreate
 
+    - name: validate output
+      debug:
+        msg: "{{ appPoolCreate }}"
+
     - name: Configure WebSite
       community.windows.win_iis_website:
         name: "Ansible 101 Demo"
         state: started
         physical_path: "{{ appDirCreate.dest }}"
         port: 80
-        hostname: "ansibledemo.msftlabs.work"
+        hostname: "{{ URL }}"
         application_pool: appPoolCreate.name
       register: webSiteConfig 
       
