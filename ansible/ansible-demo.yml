@@ -5,6 +5,7 @@
   gather_facts: yes
   vars:
     URL: "ansibledemo.msftlabs.work"
+    PATH: 'c:\inetpub\wwwroot\v1'
   collections:
     - community.windows
     - ansible.windows
@@ -21,7 +22,7 @@
 
     - name: Create App Directory
       ansible.windows.win_file:
-        path: c:\inetpub\wwwroot/v1
+        path: "{{ PATH }}"
         state: directory
       register: appDirCreate
 
@@ -41,13 +42,13 @@
       debug:
         msg: "{{ appDirCreate }}"
 
-    #- name: Configure WebSite
-    #  community.windows.win_iis_website:
-    #    name: "Ansible 101 Demo"
-    #    state: started
-    #    physical_path: "{{ appDirCreate.dest }}"
-    #    port: 80
-    #    hostname: "{{ URL }}"
-    #    application_pool: appPoolCreate.name
-    #  register: webSiteConfig 
+    - name: Configure WebSite
+      community.windows.win_iis_website:
+        name: "Ansible 101 Demo"
+        state: started
+        physical_path: "{{ PATH }}"
+        port: 80
+        hostname: "{{ URL }}"
+        application_pool: appPoolCreate.name
+      register: webSiteConfig 
       
