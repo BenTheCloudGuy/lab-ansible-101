@@ -17,6 +17,9 @@ jobs:
             - name: Testing $PATH Communications
               run: echo $PATH
 
+            - name: Test .path
+              run: cat .path
+
             - name: Test Ansible
               run: ansible --version
             
