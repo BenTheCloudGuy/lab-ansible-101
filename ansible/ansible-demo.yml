@@ -5,6 +5,8 @@
   gather_facts: yes
   vars:
     TEST: "World" 
+  collections:
+    - community.windows
   
   tasks:
     - name: Install IIS (Web-Server and Web-Common-Http)
