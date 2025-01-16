@@ -18,7 +18,7 @@ jobs:
               run: echo $PATH
 
             - name: update $PATH
-              run: echo "/home/adminuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin" > $PATH 
+              run: PATH=$(echo "/home/adminuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin")
 
             - name: Validate $PATH
               run: echo $PATH
