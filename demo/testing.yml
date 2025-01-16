@@ -5,9 +5,16 @@
   gather_facts: yes
   vars:
     TEST: "World"
+    GITHUB_TOKEN: ""
   tasks:
     - name: Print Hello MSG
-      debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
+      debug:
+        msg: "Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}"
 
     - name: Print Hello MSG
-      debug: msg='Hello {{ TEST }}'
+      debug: 
+        msg: 'Hello {{ TEST }}'
+
+    - name: Show EnvVar 
+      debug: 
+        msg: "GITHUB_TOKEN is {{ GITHUB_TOKEN }}"

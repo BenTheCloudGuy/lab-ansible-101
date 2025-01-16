@@ -35,7 +35,7 @@ State Management: Terraform maintains the state of your infrastructure, allowing
 
 ```
 
-## Slide 2 ## 
+## Slide 2 ##
 
 ```cli
 
@@ -45,7 +45,7 @@ IaC comes in two main flavors.. Tools that deploy Infrastructure.. Tools that co
 
 ## Slide 3 ##
 
-```cli 
+```cli
 PUSH vs PULL
 
 Talk about how Push works vs Pull
@@ -209,11 +209,25 @@ ansible-playbook demo/deploy_tf.yml
 ## Configure Bastion Tunnel ##
 pip install -r requirements.txt
 
-## Configure Permissions on bastion_tunnels_inventory.py
+## Configure Permissions on bastion_tunnels_inventory.py if locked out
 chmod +x /workspaces/lab-ansible-101/helper_scripts/bastion_tunnels_inventory.py
 
+## Validate inventory is being generated correctly
+ansible-inventory -i bastion_tunnels_inventory.py --list --yaml
+
+## Validate Bastion Tunnel connection is good
+ansible -i bastion_tunnels_inventory.py -m ping all
 ```
 
 ## Use Ansible to configure LINUXVM as Self-Hosted Agent for Repo ##
+
+```bash
+# Configure GitHub Token to EnvVar for Inline Var. 
+export GITHUB_TOKEN=$(az keyvault secret show --name ansible-gh-token --vault-name ansibleDemo-kv --query value -o tsv)
+
+# Call playbook passing GHToken
+ansible-playbook -i bastion_tunnels_inventory.py demo/configureRunner.yml -e "GITHUB_TOKEN=$GITHUB_TOKEN"
+
+```
 
 ## Use GH Actions and SH-Agent for CI/CD ##
