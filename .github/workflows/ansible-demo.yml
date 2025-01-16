@@ -17,8 +17,11 @@ jobs:
             - name: Testing $PATH Communications
               run: echo $PATH
 
-            - name: Test GitHub PATH
-              run: $GITHUB_PATH
+            - name: update $PATH
+              run: "echo '/home/adminuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin' > $PATH" 
+
+            - name: Validate $PATH
+              run: echo $PATH
 
             - name: Test Ansible
               run: ansible --version
