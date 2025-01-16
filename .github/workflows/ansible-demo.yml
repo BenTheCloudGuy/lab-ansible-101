@@ -17,6 +17,9 @@ jobs:
             - name: Testing $PATH Communications
               run: echo $PATH
 
+            - name: Test GitHub PATH
+              run: $GITHUB_PATH
+
             - name: Test Ansible
               run: ansible --version
             
