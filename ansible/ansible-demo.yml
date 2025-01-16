@@ -20,6 +20,11 @@
         include_management_tools: true
       register: iis
 
+    - name: Remove Default WebSite
+      community.windows.win_iis_website:
+        name: Default Web Site
+        state: absent
+      
     - name: Create App Directory
       ansible.windows.win_file:
         path: "{{ PATH }}"
@@ -37,10 +42,6 @@
         name: AnsibleAppPool
         state: started
       register: appPoolCreate
-
-    - name: validate output
-      debug:
-        msg: "{{ appDirCreate }}"
 
     - name: Configure WebSite
       community.windows.win_iis_website:
