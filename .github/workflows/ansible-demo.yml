@@ -17,8 +17,10 @@ jobs:
             - name: Test Ansible
               run: ansible --version
 
-            - name: Verify Collection is Latest
-              run: ansible-galaxy collection install community.windows --force
+            - name: Verify Ansible Collection is Latest
+              run: >
+                  ansible-galaxy collection install community.windows --force
+                  ansible-galaxy collection install ansible.windows --force
             
             - name: Run Test Windows Playbook
               run: ansible-playbook ansible/ansible-demo.yml

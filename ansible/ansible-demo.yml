@@ -7,6 +7,7 @@
     TEST: "World" 
   collections:
     - community.windows
+    - ansible.windows
   
   tasks:
     - name: Install IIS (Web-Server and Web-Common-Http)
@@ -19,13 +20,13 @@
       register: iis
 
     - name: Create App Directory
-      community.windows.win_file:
+      ansible.windows.win_file:
         path: c:\inetpub\wwwroot/v1
         state: directory
       register: appDirCreate
 
     - name: Copy App Files
-      community.windows.win_copy:
+      ansible.windows.win_copy:
         src: ansible/app_code/index.html
         dest: c:\inetpub\wwwroot\v1\index.html
       register: appFileCopy
@@ -37,7 +38,7 @@
       register: appPoolCreate
 
     - name: Configure WebSite
-      community.windows.win_iis_website:
+      ansible.windows.win_iis_website:
         name: "Ansible 101 Demo"
         state: started
         physical_path: appDirCreate.dest
