@@ -54,6 +54,6 @@
         physical_path: "{{ PATH }}"
         port: 80
         hostname: "{{ URL }}"
-        application_pool: "{{ appPoolCreate.name }}"
+        application_pool: "{{ appPoolCreate.info.name }}"
       register: webSiteConfig 
       
