@@ -18,4 +18,4 @@ jobs:
               run: ansible --version
             
             - name: Run Test Windows Playbook
-              run: ansible-playbook ansible/test-windows.yml
+              run: ansible-playbook ansible/ansible-demo.yml
