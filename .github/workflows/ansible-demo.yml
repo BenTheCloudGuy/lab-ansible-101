@@ -14,11 +14,8 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v1
 
-            - name: Current User
-              run: whoami
-            
             - name: Test Ansible
               run: ansible --version
             
-
-
+            - name: Run Test Windows Playbook
+              run: ansible-playbook ansible/test-windows.yml
