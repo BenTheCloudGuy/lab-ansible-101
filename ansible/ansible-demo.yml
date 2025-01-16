@@ -39,15 +39,15 @@
 
     - name: validate output
       debug:
-        msg: "{{ appPoolCreate }}"
+        msg: "{{ appDirCreate }}"
 
-    - name: Configure WebSite
-      community.windows.win_iis_website:
-        name: "Ansible 101 Demo"
-        state: started
-        physical_path: "{{ appDirCreate.dest }}"
-        port: 80
-        hostname: "{{ URL }}"
-        application_pool: appPoolCreate.name
-      register: webSiteConfig 
+    #- name: Configure WebSite
+    #  community.windows.win_iis_website:
+    #    name: "Ansible 101 Demo"
+    #    state: started
+    #    physical_path: "{{ appDirCreate.dest }}"
+    #    port: 80
+    #    hostname: "{{ URL }}"
+    #    application_pool: appPoolCreate.name
+    #  register: webSiteConfig 
       
