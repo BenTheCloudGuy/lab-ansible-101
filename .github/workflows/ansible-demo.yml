@@ -16,9 +16,6 @@ jobs:
 
             - name: Current User
               run: whoami
-
-            - name: Get PATH
-              run: echo $PATH
             
             - name: Test Ansible
               run: ansible --version
