@@ -16,6 +16,9 @@ jobs:
 
             - name: Test Ansible
               run: ansible --version
+
+            - name: Verify Ansible Collection is Installed
+              run: ansible-galaxy collection install community.windows
             
             - name: Run Test Windows Playbook
               run: ansible-playbook ansible/ansible-demo.yml
