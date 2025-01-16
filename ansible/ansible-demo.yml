@@ -41,7 +41,7 @@
       community.windows.win_iis_website:
         name: "Ansible 101 Demo"
         state: started
-        physical_path: appDirCreate.dest
+        physical_path: {{ appDirCreate.dest }}
         port: 80
         hostname: "ansibledemo.msftlabs.work"
         application_pool: appPoolCreate.name
