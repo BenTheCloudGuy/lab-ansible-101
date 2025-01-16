@@ -43,6 +43,10 @@
         state: started
       register: appPoolCreate
 
+    - name: validate the app pool creation
+      debug:
+        msg: "{{ appPoolCreate }}"
+
     - name: Configure WebSite
       community.windows.win_iis_website:
         name: "Ansible 101 Demo"
