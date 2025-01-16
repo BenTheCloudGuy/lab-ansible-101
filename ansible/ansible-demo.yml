@@ -19,13 +19,13 @@
       register: iis
 
     - name: Create App Directory
-      ansible.windows.win_file:
+      community.windows.win_file:
         path: c:\inetpub\wwwroot/v1
         state: directory
       register: appDirCreate
 
     - name: Copy App Files
-      ansible.windows.win_copy:
+      community.windows.win_copy:
         src: ansible/app_code/index.html
         dest: c:\inetpub\wwwroot\v1\index.html
       register: appFileCopy
@@ -37,7 +37,7 @@
       register: appPoolCreate
 
     - name: Configure WebSite
-      ansible.windows.win_iis_website:
+      community.windows.win_iis_website:
         name: "Ansible 101 Demo"
         state: started
         physical_path: appDirCreate.dest
