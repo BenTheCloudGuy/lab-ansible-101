@@ -1,0 +1,18 @@
+name: Test WinRM
+on:
+    push:
+        branches: [main]
+        paths:
+            - 'ansible/**'
+            - 'demo/**'
+            - '.github/workflows/ansible-demo.yml'
+
+jobs:
+    ansible-demo:
+        runs-on: [self-hosted, ansible]
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+
+            - name: Testing Communications
+              run: ansible-playbook ansible/test-windows.yml

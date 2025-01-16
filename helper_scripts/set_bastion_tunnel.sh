@@ -15,10 +15,11 @@ LINUXVM=${LINUXVM,,}
 WINVM01=${WINVM01,,}
 WINVM02=${WINVM02,,}
 
-# Linux VM Configs
-LINUXVM_RESOURCE_ID="/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}/providers/Microsoft.Compute/virtualMachines/${LINUXVM}"
+# VM Configs
+VM_RESOURCE_ID="/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}/providers/Microsoft.Compute/virtualMachines/${LINUXVM}"
 RESOURCE_PORT="22"
 LOCAL_PORT="10022"
 
 # Set up Bastion Tunnel to LINUXVM
-az network bastion tunnel --name "${BASTION_NAME}" --resource-group "${RESOURCE_GROUP}" --target-resource-id "${LINUXVM_RESOURCE_ID}" --resource-port "${RESOURCE_PORT}" --port "${LOCAL_PORT}"
+az network bastion tunnel --name "${BASTION_NAME}" --resource-group "${RESOURCE_GROUP}" --target-resource-id "${VM_RESOURCE_ID}" --resource-port "${RESOURCE_PORT}" --port "${LOCAL_PORT}"
+

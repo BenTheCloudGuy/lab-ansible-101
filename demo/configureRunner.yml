@@ -12,10 +12,6 @@
     runner_version: "2.321.0"  
 
   tasks:
-    # Validate GITHUB_TOKEN Variable is being passed
-    - name: Show EnvVar 
-      debug: 
-        msg: "{{ GITHUB_TOKEN }}"
 
     # Install Required Packages
     - name: Update apt package list

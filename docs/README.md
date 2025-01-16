@@ -1,7 +1,4 @@
-# Presentation # 
-
-
-## Setup Up ##
+# Setup Up #
 
 ```zsh
 # Login to Az CLI as this auth is used by Terraform and Ansible
@@ -147,3 +144,23 @@ ansible-playbook -i bastion_tunnels_inventory.py demo/configureRunner.yml -e "GI
 
 ## Use GH Actions and SH-Agent for CI/CD ##
 
+- Configure with MSI (msftlabs-core-mgmt-identity)
+- Install Az CLI
+- Configure Windows Servers for WinRM connectivity from Ansible
+
+``` bash
+iex(iwr https://raw.githubusercontent.com/AlbanAndrieu/ansible-windows/refs/heads/master/files/ConfigureRemotingForAnsible.ps1).Content
+```
+
+- Encrypte Secrets with Ansible-Vault
+- Test WinRM from Config Host
+
+```bash
+nc -w 3 -v 10.0.2.5 5986
+```
+
+- Test with Ansible
+
+```bash
+ansible -i inventory -m win_ping webservers
+```

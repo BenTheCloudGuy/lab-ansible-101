@@ -10,6 +10,7 @@
     VMTags: 
       environment: Demo
       owner: BenTheBuilder
+      
   tasks:
     - name: Create a resource group
       azure.azcollection.azure_rm_resourcegroup:
