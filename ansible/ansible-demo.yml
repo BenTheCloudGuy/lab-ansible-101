@@ -1,0 +1,46 @@
+---
+- name: Ansible Demo Windows
+  hosts: webservers
+  connection: winrm
+  gather_facts: yes
+  vars:
+    TEST: "World" 
+  
+  tasks:
+    - name: Install IIS (Web-Server and Web-Common-Http)
+      ansible.windows.win_feature:
+        name:
+          - Web-Server
+          - Web-Common-Http
+        state: present
+        include_management_tools: true
+      register: iis
+
+    - name: Create App Directory
+      ansible.windows.win_file:
+        path: c:\inetpub\wwwroot/v1
+        state: directory
+      register: appDirCreate
+
+    - name: Copy App Files
+      ansible.windows.win_copy:
+        src: ansible/app_code/index.html
+        dest: c:\inetpub\wwwroot\v1\index.html
+      register: appFileCopy
+    
+    - name: Create a new application pool in 'Started' state
+      community.windows.win_iis_webapppool:
+        name: AnsibleAppPool
+        state: started
+      register: appPoolCreate
+
+    - name: Configure WebSite
+      ansible.windows.win_iis_website:
+        name: "Ansible 101 Demo"
+        state: started
+        physical_path: appDirCreate.dest
+        port: 80
+        hostname: "ansibledemo.msftlabs.work"
+        application_pool: appPoolCreate.name
+      register: webSiteConfig 
+      
