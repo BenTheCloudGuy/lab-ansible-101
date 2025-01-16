@@ -14,5 +14,15 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v1
 
-            - name: Testing Communications
+            - name: Testing $PATH Communications
               run: echo $PATH
+
+            - name: Testing $GITHUB_PATH Communications
+              run: echo $GITHUB_PATH
+            
+            - name: Updating $GITHUB_PATH 
+              run: echo "/home/adminuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adminuser/.local/bin:/home/adminuser/.local/bin" >> $GITHUB_PATH
+
+            - name: Validate change
+              run: echo $GITHUB_PATH
+
