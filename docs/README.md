@@ -29,6 +29,10 @@ ansible-doc -l
 # Details on Module
 ansible-doc ping
 ansible-doc azure.azcollection.azure_rm_resourcegroup
+
+# Show Ansible-vault
+ansible-vault create secret.yml
+ansible-vault view secret.yml 
 ```
 
 ## Validate Ansible ##
