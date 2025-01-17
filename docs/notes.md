@@ -29,45 +29,6 @@ ansible-doc -l
 # Details on Module
 ansible-doc ping
 ansible-doc azure.azcollection.azure_rm_resourcegroup
-
-# Show Ansible-vault
-ansible-vault create secret.yml
-ansible-vault view secret.yml
-
-# Show Creating Ansible Role / talk about what this is and the folder structure
-ansible-galaxy init sample.role
-
-# KISS # 
-
-When it comes to DevOps I can’t say this enough… 
-
-KISS.. Simply put Complexity Kills productivity, ALWAYS. 
-Keep it Simple Stupid.. 
-
-The More complex a solution is, the more effort and work that will go into maintaining it.. This is the antithesis to what DevOps is supposed to be. 
-Avoid Monolithic solutions. Learn to modularize your solutions. 
-
-Your not a Dev, so don’t try to be one. Just because DEV comes first in DevOps doesn’t mean you need become a DEV. 
-When you are designing your Solution, don’t “write code” in your solutions.. Often the languages are not designed for this (HCL/YAML/JSON) 
-If an advanced “Code” solution is needed - then have your solutions call and consume them or process the results inline. 
-
-
-# Thoughts #
-Playbooks represent a single solution | You WebApplication with roles used to deplay FrontEnd, Middle Tier, Backend
-Variables.. 
-Roles perform a repetive task that is consumed in playbooks. 
-Modules are magic
-
-# Ansible Roles # 
-- Reuse and collaborate of common tasks (what we typically think of as modules)
-- Provide full life-cycle mgmt of a solution
-- De-Facto enfocement of standards and policies. 
-
-# Ansible Modules #
-- Sophisticated interactions and logic of a unit of work
-- Jinja, Python, or really any tool.
-- Abstract complexity away from users to make more powerful automation
-
 ```
 
 ## Validate Ansible ##
