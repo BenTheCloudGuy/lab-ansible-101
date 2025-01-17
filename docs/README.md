@@ -32,7 +32,10 @@ ansible-doc azure.azcollection.azure_rm_resourcegroup
 
 # Show Ansible-vault
 ansible-vault create secret.yml
-ansible-vault view secret.yml 
+ansible-vault view secret.yml
+
+# Show Creating Ansible Role / talk about what this is and the folder structure
+ansible-galaxy init sample.role
 ```
 
 ## Validate Ansible ##
