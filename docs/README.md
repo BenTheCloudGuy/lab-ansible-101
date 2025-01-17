@@ -1,5 +1,7 @@
 # Setup Up #
 
+## Environment Configurations ## 
+
 ```zsh
 # Login to Az CLI as this auth is used by Terraform and Ansible
 # Talk about how Ansible Authenticates to Azure.. EnvVars, Credentials File, SPN, Managed Identity, or CLI. 
@@ -17,11 +19,111 @@ terraform --version
 az --version
 ```
 
-## Show Local CLI Commands ##
+## Whiteboard Talking Points ##
+
+```bash
+# KISS 
+
+When it comes to DevOps I can’t say this enough… 
+
+KISS.. Simply put Complexity Kills productivity, ALWAYS. 
+Keep it Simple Stupid.. 
+
+The More complex a solution is, the more effort and work that will go into maintaining it.. This is the antithesis to what DevOps is supposed to be. 
+Avoid Monolithic solutions. Learn to modularize your solutions. 
+
+Your not a Dev, so don’t try to be one. Just because DEV comes first in DevOps doesn’t mean you need become a DEV. 
+When you are designing your Solution, don’t “write code” in your solutions.. Often the languages are not designed for this (HCL/YAML/JSON) 
+If an advanced “Code” solution is needed - then have your solutions call and consume them or process the results inline. 
+
+# Organize Tools
+- Dev = FrontEnd/BackEnd/Package/Artifacts
+- Ops = IaC, ConfigMgmt, Image Building and Distribution 
+- Draw and move icons
+- Describe each tool and function
+- Ansible Swiss Army Knife
+
+# Ansible Notes
+
+## How Ansible works
+Ansible works by connecting to your nodes and pushing out small programs, called "Ansible modules" to them. Ansible then executes these modules (over SSH by default), and removes them when finished. Your library of modules can reside on any machine, and there are no servers, daemons, or databases required.
+
+## Control Machine 
+There can be multiple remote machines which are handled by one control machine. So, for managing remote machines we have to install Ansible on control machine. 
+  - Does not support Windows (but can use WSL or Docker)
+  - No Database
+  - Requires Python3 and PIP 
+
+# Python and YAML
+Ansible uses YAML syntax for expressing Ansible playbooks. But the modules and execution leverages Python. 
+YAML (Yet another Markup Language)
+- Key-Value Pairs to represent data
+
+# Ansible Ad-Hoc Commands
+-- Before we get into Playbooks and INventory Files.. Understand ad-hoc usage
+# F= parallel runs (or forks)
+ansible GROUPNAME -a "/sbin/reboot" -f 12
+ansible GROUPNANE -m copy -a "src = /etc/yum.conf dest = /tmp/yum.conf"
+ansible GROUPNAME -m apt -a "name = nginx state = present"
+ansible GROUPNAME -m apt -a "name = nginx state = absent"
+ansible GROUPNAME -m apt -a "name = nginx state =  latest" 
+ansible localhost -m ping
+
+
+# Ansible Playbooks
+- Playbooks represent a single solution 
+- ie WebApplication with roles used to deplay FrontEnd, Middle Tier, Backend
+
+name: This tag specifies the name of the Ansible playbook. As in what this playbook will be doing. Any logical name can be given to the playbook.
+
+hosts: This tag specifies the lists of hosts or host group against which we want to run the task. The hosts field/tag is mandatory. It tells Ansible on which hosts to run the listed tasks. The tasks can be run on the same machine or on a remote machine. One can run the tasks on multiple machines and hence hosts tag can have a group of hosts’ entry as well.
+
+vars: Vars tag lets you define the variables which you can use in your playbook. Usage is similar to variables in any programming language.
+
+tasks: All playbooks should contain tasks or a list of tasks to be executed. Tasks are a list of actions one needs to perform. A tasks field contains the name of the task. This works as the help text for the user. It is not mandatory but proves useful in debugging the playbook. Each task internally links to a piece of code called a module. A module that should be executed, and arguments that are required for the module you want to execute.
+
+
+# Inventory 
+- Dynamic
+- YML vs INI
+- Organization
+
+# Ansible Variables # 
+Variable in playbooks are very similar to using variables in any programming language. It helps you to use and assign a value to a variable and use that anywhere in the playbook. One can put conditions around the value of the variables and accordingly use them in the playbook.
+
+Keywords
+block − Ansible syntax to execute a given block.
+name − Relevant name of the block - this is used in logging and helps in debugging that which all blocks were successfully executed.
+action − The code next to action tag is the task to be executed. The action again is a Ansible keyword used in yaml.
+register − The output of the action is registered using the register keyword and Output is the variable name which holds the action output.
+always − Again a Ansible keyword , it states that below will always be executed.
+msg − Displays the message.
+
+Variable Precedence: 
+- Ansible gives precedence to variables that were defined more recently, more actively, and with more explicit scope. Variables in the defaults folder inside a role are easily overridden.
+
+
+# Ansible Roles # 
+Roles provide a framework for fully independent, or interdependent collections of variables, tasks, files, templates, and modules. In Ansible, the role is the primary mechanism for breaking a playbook into multiple files. This simplifies writing complex playbooks, and it makes them easier to reuse. The breaking of playbook allows you to logically break the playbook into reusable components.
+
+Each role is basically limited to a particular functionality or desired output, with all the necessary steps to provide that result either within that role itself or in other roles listed as dependencies. Roles are not playbooks. Roles are small functionality which can be independently used but have to be used within playbooks. There is no way to directly execute a role. Roles have no explicit setting for which host the role will apply to.
+
+Top-level playbooks are the bridge holding the hosts from your inventory file to roles that should be applied to those hosts.
+  - Reuse and collaborate of common tasks (what we typically think of as modules)
+  - Roles perform a repetive task that is consumed in playbooks. 
+  - Provide full life-cycle mgmt of a solution
+  - De-Facto enfocement of standards and policies. 
+
+
+# Ansible Modules #
+- Sophisticated interactions and logic of a unit of work
+- Jinja, Python, or really any tool.
+- Abstract complexity away from users to make more powerful automation
+
+
+```
 
 ```cli
-# -m = Module.. Ansible has many built-in modules such as ping. Validated connectivity to target host. 
-ansible localhost -m ping
 
 # List all installed modules
 ansible-doc -l
@@ -36,38 +138,6 @@ ansible-vault view secret.yml
 
 # Show Creating Ansible Role / talk about what this is and the folder structure
 ansible-galaxy init sample.role
-
-# KISS # 
-
-When it comes to DevOps I can’t say this enough… 
-
-KISS.. Simply put Complexity Kills productivity, ALWAYS. 
-Keep it Simple Stupid.. 
-
-The More complex a solution is, the more effort and work that will go into maintaining it.. This is the antithesis to what DevOps is supposed to be. 
-Avoid Monolithic solutions. Learn to modularize your solutions. 
-
-Your not a Dev, so don’t try to be one. Just because DEV comes first in DevOps doesn’t mean you need become a DEV. 
-When you are designing your Solution, don’t “write code” in your solutions.. Often the languages are not designed for this (HCL/YAML/JSON) 
-If an advanced “Code” solution is needed - then have your solutions call and consume them or process the results inline. 
-
-
-# Thoughts #
-Playbooks represent a single solution | You WebApplication with roles used to deplay FrontEnd, Middle Tier, Backend
-Variables.. 
-Roles perform a repetive task that is consumed in playbooks. 
-Modules are magic
-
-# Ansible Roles # 
-- Reuse and collaborate of common tasks (what we typically think of as modules)
-- Provide full life-cycle mgmt of a solution
-- De-Facto enfocement of standards and policies. 
-
-# Ansible Modules #
-- Sophisticated interactions and logic of a unit of work
-- Jinja, Python, or really any tool.
-- Abstract complexity away from users to make more powerful automation
-
 ```
 
 ## Validate Ansible ##
@@ -85,7 +155,8 @@ Create a new file called testing.yml and execute.
       debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
 ```
 
-Demonstrate passing Variables by updateding test.yml
+- Demonstrate passing Variables by updateding test.yml
+- Show example Playbook
 
 ```yaml
 ---
@@ -104,10 +175,42 @@ Demonstrate passing Variables by updateding test.yml
       debug: msg='Hello {{ TEST }}'
 ```
 
+
 ```bash
 ## Inline (or ExtraVars) has precedence over all others. 
 ansible-playbook demo/testVar.yml -e 'TEST="From Earth"'
 ```
+
+- Develop using conditionals 
+  - Register
+  - IF/WHEN
+
+```yaml
+    # Deomonstrate When Condition from Ansible Facts
+    - name: Update Packages DEBIAN
+      become: yes 
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_facts['os_family'] != 'Debian'
+    
+    - name: Update Packages DEBIAN
+      become: yes 
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_facts['os_family'] == 'Debian'
+      register: aptUpdate
+      
+    - name: Print Hello MSG
+      ansible.builtin.command:
+        cmd: apt list --upgradable
+      register: aptUpgradable
+      when: aptUpdate.changed == true
+
+    - name: Print Hello MSG
+      debug: 
+        msg: "{{ aptUpgradable }}"
+```
+
 
 ## Deploy ResourceGroup with Ansible ##
 

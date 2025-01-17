@@ -70,9 +70,9 @@ Demonstrate passing Variables by updateding test.yml
 ansible-playbook demo/testVar.yml -e 'TEST="From Earth"'
 ```
 
-## Deploy ResourceGroup with Ansible ##
+## Deploy ResourceGroup with Ansible | IaC ##
 
-Demonstrate Deploying Azure Resources with Ansible. 
+Demonstrate Deploying Azure Resources with Ansible.
 
 ```yaml
 ---
@@ -112,55 +112,42 @@ ansible-playbook demo/deployRG.yml
 ansible-galaxy collection install community.general --force
 
 # Review then trigger Playbook
-ansible-playbook demo/deploy_tf.yml
+ansible-playbook demo/deploy_infra.yml
 ```
 
-## Setup Bastion Tunnels for Ansible ##
+```yaml
+---
+- name: Deploy infrastructure
+  hosts: localhost
+  gather_facts: no
+  vars:
+    TF_DIR: "/workspaces/lab-ansible-101/infra"
+    RESOURCE_GROUP_NAME: "ansibleDemo"
+    
+  tasks:
+    - name: Ensure Terraform is installed
+      ansible.builtin.command:
+        cmd: terraform --version
+      register: terraform_version
+      failed_when: terraform_version.rc != 0
+      changed_when: false
 
-```bash
-## Configure Bastion Tunnel ##
-pip install -r requirements.txt
+    - name: Initialize Terraform
+      community.general.terraform:
+        project_path: "{{ TF_DIR }}"
+        state: present
+        force_init: true
+      check_mode: true
+      register: terraform_plan
 
-## Configure Permissions on bastion_tunnels_inventory.py if locked out
-chmod +x /workspaces/lab-ansible-101/helper_scripts/bastion_tunnels_inventory.py
+    - name: Apply Terraform configuration
+      community.general.terraform:
+        project_path: "{{ TF_DIR }}"
+        state: present
+      check_mode: false
+      register: terraform_apply
 
-## Validate inventory is being generated correctly
-ansible-inventory -i bastion_tunnels_inventory.py --list --yaml
-
-## Validate Bastion Tunnel connection is good
-ansible -i bastion_tunnels_inventory.py -m ping all
-```
-
-## Use Ansible to configure LINUXVM as Self-Hosted Agent for Repo ##
-
-```bash
-# Configure GitHub Token to EnvVar for Inline Var. 
-export GITHUB_TOKEN=$(az keyvault secret show --name ansible-gh-token --vault-name ansibleDemo-kv --query value -o tsv)
-
-# Call playbook passing GHToken
-ansible-playbook -i bastion_tunnels_inventory.py demo/configureRunner.yml -e "GITHUB_TOKEN=$GITHUB_TOKEN"
-
-```
-
-## Use GH Actions and SH-Agent for CI/CD ##
-
-- Configure with MSI (msftlabs-core-mgmt-identity)
-- Install Az CLI
-- Configure Windows Servers for WinRM connectivity from Ansible
-
-``` bash
-iex(iwr https://raw.githubusercontent.com/AlbanAndrieu/ansible-windows/refs/heads/master/files/ConfigureRemotingForAnsible.ps1).Content
-```
-
-- Encrypte Secrets with Ansible-Vault
-- Test WinRM from Config Host
-
-```bash
-nc -w 3 -v 10.0.2.5 5986
-```
-
-- Test with Ansible
-
-```bash
-ansible -i inventory -m win_ping webservers
+    - name: Display Terraform Output
+      ansible.builtin.debug:
+        msg: "{{ terraform_apply.outputs }}"
 ```

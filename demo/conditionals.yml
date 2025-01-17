@@ -1,0 +1,43 @@
+---
+- name: test ansible installation
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    TEST: "World"
+    
+  tasks:
+    # Getting started with Facts and Output to Screen for debugging
+    - name: Print Hello MSG
+      debug: msg='Hello from {{ ansible_facts['nodename'] }} running on {{ ansible_facts['os_family'] }}'
+
+    - name: Print Hello MSG
+      debug: msg='Hello {{ TEST }}'
+
+
+    # Deomonstrate When Condition from Ansible Facts
+    - name: Update Packages DEBIAN
+      become: yes 
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_facts['os_family'] != 'Debian'
+    
+    - name: Update Packages DEBIAN
+      become: yes 
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_facts['os_family'] == 'Debian'
+      register: aptUpdate
+      
+    - name: Install NodeJS
+      become: yes
+      ansible.builtin.apt:
+        name: nodejs
+        state: present
+      register: nodejsInstall
+    
+
+    - name: Debug NodeJs Install register
+      debug: 
+        msg: "{{ nodejsInstall }}"
+
+    
